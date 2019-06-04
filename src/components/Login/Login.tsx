@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
+import setAuthorizationToken from "../../utils/setAuthorizationToken";
 import Button from "../Button/Button";
 import Input from "../FormElements/Input";
 
@@ -43,7 +44,9 @@ export class Login extends Component<any, any> {
       },
     })
     .then((response) => {
-      localStorage.setItem("JWT", response.data.token);
+      const token = response.data.token;
+      localStorage.setItem("jwtToken", token);
+      setAuthorizationToken(token);
     })
     .catch((error) => {
       console.log(error.response);
