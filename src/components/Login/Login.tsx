@@ -43,7 +43,7 @@ export class Login extends Component<any, any> {
       },
     })
     .then((response) => {
-      console.log(response);
+      localStorage.setItem("JWT", response.data.token);
     })
     .catch((error) => {
       console.log(error.response);
