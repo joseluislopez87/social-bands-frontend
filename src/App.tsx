@@ -1,3 +1,4 @@
+import "bulma";
 import React from "react";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import "./App.css";
@@ -38,8 +39,10 @@ function AppRouter() {
 
       <section className="section">
         <div className="container">
-          <Route path="/login/" component={UserLogin} />
-          <Route path="/users" component={User} />
+          <div className="columns">
+            <Route path="/login/" component={UserLogin} />
+            <Route path="/user/" component={User} />
+          </div>
         </div>
       </section>
     </Router>

@@ -15,11 +15,13 @@ export class Login extends Component<any, any> {
 
   public render() {
     return(
-      <form onSubmit={(e) => this.handleSubmit(e)}>
-        <Input id="username" label="Username" onChange={(e: any) => this.handleChange(e)} />
-        <Input id="password" label="Password" type="password" onChange={(e: any) => this.handleChange(e)} />
-        <Button>Log In</Button>
-      </form>
+      <div className="column is-3 is-offset-4">
+        <form onSubmit={(e) => this.handleSubmit(e)}>
+          <Input id="username" label="Username" onChange={(e: any) => this.handleChange(e)} />
+          <Input id="password" label="Password" type="password" onChange={(e: any) => this.handleChange(e)} />
+          <Button>Log In</Button>
+        </form>
+      </div>
     );
   }
 
