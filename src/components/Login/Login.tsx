@@ -4,10 +4,13 @@ import setAuthorizationToken from "../../utils/setAuthorizationToken";
 import Button from "../Button/Button";
 import Input from "../FormElements/Input";
 
-export default class Login extends Component<any, any> {
+import "./Login.scss";
+
+class Login extends Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
+      isLoading: false,
       password: "",
       username: "",
     };
@@ -15,8 +18,8 @@ export default class Login extends Component<any, any> {
 
   public render() {
     return(
-      <div className="column is-3 is-offset-4">
-        <form onSubmit={(e) => this.handleSubmit(e)}>
+      <div className="column is-4 is-offset-4">
+        <form onSubmit={(e) => this.handleSubmit(e)} className={this.state.isLoading ? "loading" : ""}>
           <Input id="username" label="Username" onChange={(e: any) => this.handleChange(e)} />
           <Input id="password" label="Password" type="password" onChange={(e: any) => this.handleChange(e)} />
           <Button>Log In</Button>
@@ -33,6 +36,10 @@ export default class Login extends Component<any, any> {
 
   private handleSubmit = (event: any) => {
     event.preventDefault();
+
+    this.setState({
+      isLoading: true,
+    });
 
     const API_BASEURL = "https://social-band-project.herokuapp.com/auth/login";
 
@@ -54,10 +61,15 @@ export default class Login extends Component<any, any> {
       setAuthorizationToken(token);
 
       // redirect to home once log in is successfull:
-      this.props.history.push("/");
+      this.props.history.push("/user");
     })
     .catch((error) => {
       console.log(error.response);
+      this.setState({
+        isLoading: false,
+      });
     });
   }
 }
+
+export default Login;

@@ -7,9 +7,7 @@ interface IButton {
 const Button = ({ children }: IButton) => {
   return(
     <div className="field is-grouped">
-      <div className="control">
-        <button className="button is-link">{children}</button>
-      </div>
+      <button className="button is-link is-fullwidth">{children}</button>
     </div>
   );
 };
