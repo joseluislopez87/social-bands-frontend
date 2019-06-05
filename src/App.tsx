@@ -1,9 +1,9 @@
 import "bulma";
 import React from "react";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
-import "./App.css";
-import { Login } from "./components/Login/Login";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Login from "./components/Login/Login";
 import Navbar from "./components/Navbar/Navbar";
+import User from "./views/User/User";
 
 const App: React.FC = () => {
   return (
@@ -13,34 +13,15 @@ const App: React.FC = () => {
   );
 };
 
-function User() {
-  return <h2>User</h2>;
-}
-
-function UserLogin() {
-  return <Login />;
-}
-
-function Routes() {
-  return(
-    <div>
-      <Link to="/login/" className="button is-primary">Login</Link>
-      <Link to="/user/" className="button is-light">User</Link>
-    </div>
-  );
-}
-
 function AppRouter() {
   return (
     <Router>
-      <Navbar>
-        <Routes />
-      </Navbar>
+      <Navbar />
 
       <section className="section">
         <div className="container">
           <div className="columns">
-            <Route path="/login/" component={UserLogin} />
+            <Route path="/login/" component={Login} />
             <Route path="/user/" component={User} />
           </div>
         </div>

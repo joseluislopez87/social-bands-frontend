@@ -4,7 +4,7 @@ import setAuthorizationToken from "../../utils/setAuthorizationToken";
 import Button from "../Button/Button";
 import Input from "../FormElements/Input";
 
-export class Login extends Component<any, any> {
+export default class Login extends Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -46,9 +46,15 @@ export class Login extends Component<any, any> {
       },
     })
     .then((response) => {
+      // Set authorization token to local storage:
       const token = response.data.token;
       localStorage.setItem("jwtToken", token);
+
+      // Set the header as well:
       setAuthorizationToken(token);
+
+      // redirect to home once log in is successfull:
+      this.props.history.push("/");
     })
     .catch((error) => {
       console.log(error.response);

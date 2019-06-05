@@ -1,11 +1,8 @@
 import "bulma";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = (props: any) => {
-  const {
-    children,
-  } = props;
-
   return(
     <nav className="navbar">
       <div className="navbar-brand">
@@ -16,7 +13,8 @@ const Navbar = (props: any) => {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            {children}
+            <Link to="/login/" className="button is-primary">Login</Link>
+            <Link to="/user/" className="button is-light">User</Link>
           </div>
         </div>
       </div>
