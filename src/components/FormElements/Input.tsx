@@ -12,13 +12,16 @@ interface IInputTypes {
 const Input = ({ id, label, onChange, type, value }: IInputTypes) => {
   return(
     <div className="field">
-      <label htmlFor={id}>{label}</label>
-      <input
-        id={id}
-        onChange={onChange}
-        type={type}
-        value={value}
-        name={id} />
+      <label className="label" htmlFor={id}>{label}</label>
+      <div className="control">
+        <input
+          className="input"
+          id={id}
+          onChange={onChange}
+          type={type}
+          value={value}
+          name={id} />
+      </div>
     </div>
   );
 };
