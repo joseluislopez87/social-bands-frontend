@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, {ThemeProvider} from 'styled-components';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
@@ -10,6 +10,8 @@ import NavBar from 'components/NavBar/NavBar';
 import Explore from 'containers/Explore/Explore';
 import Friends from 'containers/Friends/Friends';
 import ProfileEdit from 'containers/Profile/ProfileEdit';
+import Profile from 'containers/Profile/Profile';
+import ProfileHeader from 'containers/Profile/ProfileHeader';
 
 const AppContainer = styled.div`
   background: ${props => props.theme.appBackground};
@@ -27,17 +29,30 @@ const Content = styled.main`
 `;
 
 function App() {
+  const [profile, setProfile] = useState({});
+
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <AppContainer>
-          <Header />
+          <Header>
+            <Route
+                path='/profile/:id'
+                render={() => <ProfileHeader profile={profile} />}
+              />
+          </Header>
           <Content role='main'>
             
             <Switch>
               <Route exact path='/explore' component={Explore} />
               <Route path='/friends' component={Friends} />
-              <Route path='/profile/edit' component={ProfileEdit} />
+              <Route exact path='/profile/edit' component={ProfileEdit} />
+              <Route
+                path='/profile/:id'
+                render={
+                  (props) => <Profile {...props} profile={profile} setProfile={setProfile} />
+                }
+              />
             </Switch>
 
           </Content>

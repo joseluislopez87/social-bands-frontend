@@ -32,6 +32,8 @@ const theme = {
     'keyboard': '-300px 0',
   },
 
+  lightShadow: '2px 2px 6px #02020224',
+
   // App
   appBackground: '#f5f5f5',
 

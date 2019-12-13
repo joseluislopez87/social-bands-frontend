@@ -28,6 +28,46 @@ const instruments = [
   }
 ]
 
+// Styles:
+const styles = [
+  {
+    'id': 0,
+    'name': 'rock',
+  },
+  {
+    'id': 1,
+    'name': 'metal',
+  },
+  {
+    'id': 2,
+    'name': 'metal-heavy'
+  },
+  {
+    'id': 3,
+    'name': 'jazz',
+  },
+]
+
+// Proficiencies:
+const proficiencies = [
+  {
+    'id': 0,
+    'name': 'beginner',
+  },
+  {
+    'id': 1,
+    'name': 'intermediate',
+  },
+  {
+    'id': 2,
+    'name': 'advanced',
+  },
+  {
+    'id': 3,
+    'name': 'master',
+  },
+]
+
 /* Generated data */
 
 // Faker maker
@@ -39,12 +79,15 @@ const makeData = (createFunction, num = 5) => {
 
 // Profiles:
 const createProfile = user_id => {
+  const location = `${faker.address.city()}, ${faker.address.country()}`;
+
   return {
     id: faker.random.uuid(),
     user_id: user_id,
     display_name: faker.name.firstName(),
     picture: faker.image.avatar(),
-    introduction: faker.lorem.paragraph(),
+    location: location,
+    bio: faker.lorem.paragraph(),
   }
 }
 
@@ -65,7 +108,7 @@ const createUser = () => {
 const createFriend = () => {
   return {
     id: faker.random.uuid(),
-    friend_id: sample(uuidsStore),
+    friend_user_id: sample(uuidsStore),
   }
 }
 
@@ -140,4 +183,6 @@ export {
   requests,
   conversations,
   profiles,
+  styles,
+  proficiencies,
 };

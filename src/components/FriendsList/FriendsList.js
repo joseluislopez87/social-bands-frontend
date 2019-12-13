@@ -25,7 +25,7 @@ const FriendsList = ({items}) => {
         items ?
           items.map(item => {
             // get item's user data:
-            const user = find(users, {id: item.friend_id});
+            const user = find(users, {id: item.friend_user_id});
             const profile = find(profiles, {user_id: user.id})
 
             return(
