@@ -35,7 +35,7 @@ const RequestsList = ({items}) => {
                 image={profile.picture}
                 name={profile.display_name}
                 text={timeFormat(item.created_at)}
-                url={`/profile/${user.id}`}
+                url={`/profile/${user.username}`}
                 urlLabel={`Go to ${profile.display_name}'s profile`}
               >
                 <Button handleClick={() => console.log('accept')}>

@@ -34,7 +34,7 @@ const FriendsList = ({items}) => {
                 image={profile.picture}
                 name={profile.display_name}
                 text={user.online ? 'Online' : 'Offline'}
-                url={`/profile/${user.id}`}
+                url={`/profile/${user.username}`}
                 urlLabel={`Go to ${profile.display_name}'s profile`}
               >
                 <RoundButton

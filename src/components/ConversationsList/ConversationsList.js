@@ -52,7 +52,7 @@ const ConversationsList = ({items}) => {
                 image={profile.picture}
                 name={profile.display_name}
                 text={item.latest_message}
-                url={`/profile/${user.id}`}
+                url={`/profile/${user.username}`}
                 urlLabel={`Go to ${profile.display_name}'s profile`}
                 childrenColumn
               >
