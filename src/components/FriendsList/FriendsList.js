@@ -38,7 +38,7 @@ const FriendsList = ({items}) => {
                 urlLabel={`Go to ${profile.display_name}'s profile`}
               >
                 <RoundButton
-                  to={`friends/messages/${user.id}`}
+                  to={`friends/messages/${user.username}`}
                   icon='/icons/chat.svg'
                 >
                   {`Open chat conversation with ${profile.display_name}`}
