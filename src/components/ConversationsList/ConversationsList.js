@@ -5,7 +5,7 @@ import Card from 'components/Card/Card';
 import {find} from 'lodash';
 import {format} from 'date-fns';
 
-import {users} from 'data';
+import {users, profiles} from 'data';
 
 const Wrapper = styled.div`
   display: flex;
@@ -44,15 +44,16 @@ const ConversationsList = ({items}) => {
           items.map(item => {
             // get item's user data:
             const user = find(users, {id: item.contact_user_id});
+            const profile = find(profiles, {user_id: user.id})
 
             return(
               <Card
                 key={item.id} 
-                image={user.picture}
-                name={user.display_name}
+                image={profile.picture}
+                name={profile.display_name}
                 text={item.latest_message}
                 url={`/profile/${user.id}`}
-                urlLabel={`Go to ${user.display_name}'s profile`}
+                urlLabel={`Go to ${profile.display_name}'s profile`}
                 childrenColumn
               >
                 <LatestTime>

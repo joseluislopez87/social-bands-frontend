@@ -5,7 +5,8 @@ import Card from 'components/Card/Card';
 import Button from 'components/Buttons/Button';
 import {find} from 'lodash';
 
-import {users} from 'data';
+import {users, profiles} from 'data';
+import timeFormat from 'utils/date';
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,15 +27,16 @@ const RequestsList = ({items}) => {
           items.map(item => {
             // get item's user data:
             const user = find(users, {id: item.from_user_id});
+            const profile = find(profiles, {user_id: user.id})
 
             return(
               <Card
                 key={item.id} 
-                image={user.picture}
-                name={user.display_name}
-                text={item.type}
+                image={profile.picture}
+                name={profile.display_name}
+                text={timeFormat(item.created_at)}
                 url={`/profile/${user.id}`}
-                urlLabel={`Go to ${user.display_name}'s profile`}
+                urlLabel={`Go to ${profile.display_name}'s profile`}
               >
                 <Button handleClick={() => console.log('accept')}>
                   Accept

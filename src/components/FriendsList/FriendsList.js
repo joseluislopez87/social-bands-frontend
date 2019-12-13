@@ -5,7 +5,7 @@ import Card from 'components/Card/Card';
 import RoundButton from 'components/Buttons/RoundButton';
 import {find} from 'lodash';
 
-import {users} from 'data';
+import {users, profiles} from 'data';
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,21 +26,22 @@ const FriendsList = ({items}) => {
           items.map(item => {
             // get item's user data:
             const user = find(users, {id: item.friend_id});
+            const profile = find(profiles, {user_id: user.id})
 
             return(
               <Card
                 key={item.id} 
-                image={user.picture}
-                name={user.display_name}
+                image={profile.picture}
+                name={profile.display_name}
                 text={user.online ? 'Online' : 'Offline'}
                 url={`/profile/${user.id}`}
-                urlLabel={`Go to ${user.display_name}'s profile`}
+                urlLabel={`Go to ${profile.display_name}'s profile`}
               >
                 <RoundButton
                   to={`friends/messages/${user.id}`}
                   icon='/icons/chat.svg'
                 >
-                  {`Open chat conversation with ${user.name}`}
+                  {`Open chat conversation with ${profile.display_name}`}
                 </RoundButton>
               </Card>
             );
