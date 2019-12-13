@@ -1,5 +1,34 @@
 import faker from 'faker';
 import {sample} from 'lodash';
+import { format } from 'date-fns';
+
+/* Static data */
+
+// Instruments:
+const instruments = [
+  {
+    'id': 0,
+    'name': 'guitar-acoustic',
+    'display_name': 'Acoustic guitar',
+  },
+  {
+    'id': 1,
+    'name': 'guitar-electric',
+    'display_name': 'Electric guitar',
+  },
+  {
+    'id': 2,
+    'name': 'guitar-bass',
+    'display_name': 'Bass guitar',
+  },
+  {
+    'id': 3,
+    'name': 'keyboard',
+    'display_name': 'Keyboard',
+  }
+]
+
+/* Generated data */
 
 // Faker maker
 const makeData = (createFunction, num = 5) => {
@@ -8,36 +37,29 @@ const makeData = (createFunction, num = 5) => {
     .map(createFunction);
 }
 
+// Profiles:
+const createProfile = user_id => {
+  return {
+    id: faker.random.uuid(),
+    user_id: user_id,
+    display_name: faker.name.firstName(),
+    picture: faker.image.avatar(),
+    introduction: faker.lorem.paragraph(),
+  }
+}
+
 // Users:
 const createUser = () => {
-  const displayName = faker.name.firstName();
-  const name = displayName.toLowerCase();
   const uuid = faker.random.uuid();
   uuidsStore.push(uuid);
 
   return {
     id: uuid,
-    name: name,
-    display_name: displayName,
+    username: faker.internet.userName(),
     email: faker.internet.email(),
-    picture: faker.image.avatar(),
-    isOnline: faker.random.boolean(),
+    is_online: faker.random.boolean(),
   }
 }
-
-// Instruments:
-const instruments = [
-  {
-    'id': 0,
-    'name': 'Electric guitar',
-    'icon': 'guitar-electric',
-  },
-  {
-    'id': 1,
-    'name': 'Drums',
-    'icon': 'drums',
-  },
-]
 
 // Friends:
 const createFriend = () => {
@@ -49,10 +71,19 @@ const createFriend = () => {
 
 // Requests
 const createRequest = () => {
+  let startDate = new Date();
+  startDate.setMonth(startDate.getMonth() - 1);
+  let endDate = new Date();
+
+  startDate = format(startDate, 'yyy-M-dd');
+  endDate = format(endDate, 'yyy-M-dd');
+  
+  const createdAt = faker.date.between(startDate, endDate);
+
   return {
     id: faker.random.uuid(),
     from_user_id: sample(uuidsStore),
-    timestamp: faker.date.past(),
+    created_at: createdAt,
     type: 'friend-request',
   }
 }
@@ -94,6 +125,12 @@ const requests = makeData(createRequest, 2);
 const conversations = makeData(createConversation);
 const notifications = makeData(createNotification, 4);
 
+const profiles = [];
+users.map(user =>
+  profiles
+    .push(createProfile(user.id)
+));
+
 // Export:
 export {
   users,
@@ -101,5 +138,6 @@ export {
   notifications,
   instruments,
   requests,
-  conversations
+  conversations,
+  profiles,
 };

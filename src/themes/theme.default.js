@@ -25,6 +25,13 @@ const theme = {
     gradientRotated: utils.gradientRotated,
   },
 
+  instruments: {
+    'guitar-acoustic': '0 0',
+    'guitar-electric': '-100px 0',
+    'guitar-bass': '-200px 0',
+    'keyboard': '-300px 0',
+  },
+
   // App
   appBackground: '#f5f5f5',
 
