@@ -15,7 +15,7 @@ const Title = styled.h2`
 
 const Children = styled.div`
   display: flex;
-  overflow-y: scroll;
+  flex-wrap: wrap;
 `;
 
 const ProfileSection = ({title, children}) => {

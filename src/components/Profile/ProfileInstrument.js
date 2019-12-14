@@ -9,8 +9,8 @@ import InstrumentProficiency from 'components/Instruments/InstrumentProficiency'
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 1.5em;
-  width: 80px;
+  margin-bottom: 1em;
+  width: 25%;
 `;
 
 const Name = styled.div`
