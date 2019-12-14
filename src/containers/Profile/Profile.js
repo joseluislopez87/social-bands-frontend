@@ -15,58 +15,45 @@ const Location = styled.div`
   text-align: center;
 `;
 
-class Profile extends React.Component {
+const descProficiency = (a, b) => {
+  if(a.proficiency > b.proficiency) return -1;
+  return 1;
+}
 
-  constructor(props) {
-    super(props);
+const Profile = ({profile, setProfile}) => {
+  const user = sample(users);
 
-    this.state = {
-      user: sample(users),
-      profile: {instruments: []},
-    }
+  if(!profile.hasOwnProperty('id')) {
+    setProfile(find(profiles, {user_id: user.id}));
   }
 
-  componentDidMount() {
-    this.setState({...this.state, profile: find(profiles, {user_id: this.state.user.id})});
-    this.props.setProfile(find(profiles, {user_id: this.state.user.id}));
-  }
-
-  // Sort instruments by descending proficiency:
-  descProficiency(a, b) {
-    if(a.proficiency > b.proficiency) return -1;
-    return 1;
-  }
-
-  render() {
-    return(
-      <>
-        <Location>{this.state.profile.location}</Location>
-        <Bio>{this.state.profile.bio ? this.state.profile.bio : ''}</Bio>
-        <ProfileSection title='Instruments'>
-          {
-            this.state.profile.instruments.length > 0 ?
-              this.state.profile.instruments
-                .sort((a, b) => this.descProficiency(a, b))
-                .map(instrument => {
-                  return(
-                    <ProfileInstrument
-                      key={instrument.id}
-                      instrument_id={instrument.instrument_id}
-                      proficiency={instrument.proficiency}
-                    />
-                  );
-                })
-            :
-            ''
-          }
-        </ProfileSection>
-        <ProfileSection title='Styles'>
-          <MusicStyle value='blues'>Blues</MusicStyle>
-        </ProfileSection>
-      </>
-    );
-  }
-
+  return(
+    <>
+      <Location>{profile.location}</Location>
+      <Bio>{profile.bio ? profile.bio : ''}</Bio>
+      <ProfileSection title='Instruments'>
+        {
+          profile.instruments ?
+            profile.instruments
+              .sort((a, b) => descProficiency(a, b))
+              .map(instrument => {
+                return(
+                  <ProfileInstrument
+                    key={instrument.id}
+                    instrument_id={instrument.instrument_id}
+                    proficiency={instrument.proficiency}
+                  />
+                );
+              })
+          :
+          ''
+        }
+      </ProfileSection>
+      <ProfileSection title='Styles'>
+        <MusicStyle value='blues'>blues</MusicStyle>
+      </ProfileSection>
+    </>
+  );
 }
 
 export default Profile;

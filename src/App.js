@@ -24,24 +24,26 @@ const AppContainer = styled.div`
 
 const Content = styled.main`
   box-sizing: border-box;
+  display: ${({showNotifications}) => showNotifications ? 'none' : 'block'};
   flex: 1;
   margin: 1rem;
 `;
 
 function App() {
+  const [showNotifications, toggleNotifications] = useState(false);
   const [profile, setProfile] = useState({});
 
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <AppContainer>
-          <Header>
+          <Header showNotifications={showNotifications} toggleNotifications={toggleNotifications}>
             <Route
                 path='/profile'
                 render={() => <ProfileHeader profile={profile} />}
               />
           </Header>
-          <Content role='main'>
+          <Content showNotifications={showNotifications}>
             
             <Switch>
               <Route exact path='/explore' component={Explore} />

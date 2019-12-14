@@ -25,6 +25,7 @@ const StyledNavLink = styled(NavLink)`
 
 const Image = styled.img`
   margin-bottom: 0.3rem;
+  height: 32px;
   width: 32px;
 `;
 

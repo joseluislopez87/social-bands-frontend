@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
@@ -11,10 +11,15 @@ import withBadge from 'hoc/withBadge';
 
 const StyledHeader = styled.header`
   background: ${({theme}) => theme.headerBackground};
-  border-radius: 0 0 1rem 1rem;
+  border-radius: ${({showNotifications}) => showNotifications ? '0' : '0 0 1rem 1rem'};
   color: white;
   display: flex;
+  flex: 1;
   flex-direction: column;
+  min-height: ${({showNotifications}) => showNotifications ? '100%' : '0'};
+  position: relative;
+  width: 100%;
+  z-index: ${({showNotifications}) => showNotifications ? '1000' : 'auto'};
 `;
 
 const HeaderNav = styled.nav`
@@ -55,11 +60,9 @@ const BadgedNotifications = withBadge(
   StyledBadge)
   (NotificationsIcon);
 
-const Header = ({children}) => {
-  const [showNotifications, toggleNotifications] = useState(false);
-
+const Header = ({showNotifications, toggleNotifications, children}) => {
   return(
-  <StyledHeader role='banner'>
+  <StyledHeader role='banner' showNotifications={showNotifications}>
     <HeaderNav>
       <LogoLink to='/' aria-label='Go to Home'>
         <Logo src='/logo/app.svg' alt='' />

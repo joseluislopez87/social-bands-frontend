@@ -14,7 +14,7 @@ const Nav = styled.nav`
   padding: 0 0.5rem;
   position: sticky;
   right: 0;
-  z-index: 100;
+  z-index: 2000;
 `;
 
 const NavBar = () => (

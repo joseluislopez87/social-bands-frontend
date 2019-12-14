@@ -19,7 +19,8 @@ const NotificationsTrail = ({items}) => {
   return(
     <Trail>
       {
-        items
+        items.length > 0 ?
+          items
           .sort((a, b) => b.timestamp - a.timestamp)
           .map(item => {
             return(
@@ -35,6 +36,8 @@ const NotificationsTrail = ({items}) => {
               />
             )
           })
+        :
+        <h4>No notifications to show.</h4>
       }
     </Trail>
   )
