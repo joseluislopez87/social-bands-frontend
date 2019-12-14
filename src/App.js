@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled, {ThemeProvider} from 'styled-components';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
 import theme from 'themes/theme.default';
 
@@ -12,6 +12,7 @@ import Friends from 'containers/Friends/Friends';
 import ProfileEdit from 'containers/Profile/ProfileEdit';
 import Profile from 'containers/Profile/Profile';
 import ProfileHeader from 'containers/Profile/ProfileHeader';
+import Settings from 'containers/Settings/Settings';
 
 const AppContainer = styled.div`
   background: ${props => props.theme.appBackground};
@@ -29,40 +30,44 @@ const Content = styled.main`
   margin: 1rem;
 `;
 
-function App() {
+const App = ({ history }) => {
   const [showNotifications, toggleNotifications] = useState(false);
   const [profile, setProfile] = useState({});
 
+  history.listen(() => {
+    toggleNotifications(false);
+    window.scrollTo(0, 0);
+  });
+
   return (
     <ThemeProvider theme={theme}>
-      <Router>
-        <AppContainer>
-          <Header showNotifications={showNotifications} toggleNotifications={toggleNotifications}>
+      <AppContainer>
+        <Header showNotifications={showNotifications} toggleNotifications={toggleNotifications}>
+          <Route
+              path='/profile'
+              render={() => <ProfileHeader profile={profile} />}
+            />
+        </Header>
+        <Content showNotifications={showNotifications}>
+          
+          <Switch>
+            <Route exact path='/explore' component={Explore} />
+            <Route path='/friends' component={Friends} />
+            <Route exact path='/profile/edit' component={ProfileEdit} />
             <Route
-                path='/profile'
-                render={() => <ProfileHeader profile={profile} />}
-              />
-          </Header>
-          <Content showNotifications={showNotifications}>
-            
-            <Switch>
-              <Route exact path='/explore' component={Explore} />
-              <Route path='/friends' component={Friends} />
-              <Route exact path='/profile/edit' component={ProfileEdit} />
-              <Route
-                path='/profile'
-                render={
-                  (props) => <Profile {...props} profile={profile} setProfile={setProfile} />
-                }
-              />
-            </Switch>
+              path='/profile'
+              render={
+                (props) => <Profile {...props} profile={profile} setProfile={setProfile} />
+              }
+            />
+            <Route path='/settings' component={Settings} />
+          </Switch>
 
-          </Content>
-          <NavBar />
-        </AppContainer>
-      </Router>
+        </Content>
+        <NavBar />
+      </AppContainer>
     </ThemeProvider>
   );
 }
 
-export default App;
+export default withRouter(App);

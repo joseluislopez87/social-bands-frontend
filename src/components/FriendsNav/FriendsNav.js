@@ -12,7 +12,7 @@ const Nav = styled.nav`
 const StyledNavLink = styled(NavLink)`
   color: ${({theme}) => theme.colors.inactive};
   flex: 1;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   padding: 1.2em 1em;
   position: relative;
   text-align: center;

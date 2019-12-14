@@ -22,7 +22,7 @@ const ActionsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: -15%;
-  width: 80%;
+  width: 70%;
 `;
 
 const Picture = styled.img`

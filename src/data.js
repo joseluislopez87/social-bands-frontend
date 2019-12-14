@@ -185,7 +185,7 @@ const users = makeData(createUser, 50);
 const friends = makeData(createFriend, 5);
 const requests = makeData(createRequest, 2);
 const conversations = makeData(createConversation);
-const notifications = makeData(createNotification, 0);
+const notifications = makeData(createNotification, 10);
 
 const profiles = [];
 users.map(user =>
