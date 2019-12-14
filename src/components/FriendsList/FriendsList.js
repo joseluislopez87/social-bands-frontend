@@ -18,34 +18,44 @@ const EmptyText = styled.div`
   text-align: center;
 `;
 
+const sortByStatus = (a, b) => {
+  const a_infos = find(users, {id: a.friend_user_id});
+  const b_infos = find(users, {id: b.friend_user_id});
+
+  if(a_infos.is_online > b_infos.is_online) return -1;
+  return 1;
+}
+
 const FriendsList = ({items}) => {
   return(
     <Wrapper>
       {
         items ?
-          items.map(item => {
-            // get item's user data:
-            const user = find(users, {id: item.friend_user_id});
-            const profile = find(profiles, {user_id: user.id})
+          items
+            .sort((a, b) => sortByStatus(a, b))
+            .map(item => {
+              // get item's user data:
+              const user = find(users, {id: item.friend_user_id});
+              const profile = find(profiles, {user_id: user.id})
 
-            return(
-              <Card
-                key={item.id} 
-                image={profile.picture}
-                name={profile.display_name}
-                text={user.online ? 'Online' : 'Offline'}
-                url={`/profile/${user.username}`}
-                urlLabel={`Go to ${profile.display_name}'s profile`}
-              >
-                <RoundButton
-                  to={`friends/messages/${user.username}`}
-                  icon='/icons/chat.svg'
+              return(
+                <Card
+                  key={item.id} 
+                  image={profile.picture}
+                  name={profile.display_name}
+                  text={user.is_online ? 'Online' : 'Offline'}
+                  url={`/profile/${user.username}`}
+                  urlLabel={`Go to ${profile.display_name}'s profile`}
                 >
-                  {`Open chat conversation with ${profile.display_name}`}
-                </RoundButton>
-              </Card>
-            );
-          })
+                  <RoundButton
+                    to={`friends/messages/${user.username}`}
+                    icon='/icons/chat.svg'
+                  >
+                    {`Open chat conversation with ${profile.display_name}`}
+                  </RoundButton>
+                </Card>
+              );
+            })
           :
           <EmptyText>No friends to show.</EmptyText>
       }

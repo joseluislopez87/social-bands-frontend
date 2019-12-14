@@ -30,6 +30,11 @@ const theme = {
     'guitar-electric': '-100px 0',
     'guitar-bass': '-200px 0',
     'keyboard': '-300px 0',
+    'drums': '-400px 0',
+  },
+
+  styles: {
+    'blues': 'linear-gradient(.15turn, #6a11cb, #2575fc)',
   },
 
   lightShadow: '2px 2px 6px #02020224',

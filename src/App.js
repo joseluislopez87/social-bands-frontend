@@ -37,7 +37,7 @@ function App() {
         <AppContainer>
           <Header>
             <Route
-                path='/profile/:id'
+                path='/profile'
                 render={() => <ProfileHeader profile={profile} />}
               />
           </Header>
@@ -48,7 +48,7 @@ function App() {
               <Route path='/friends' component={Friends} />
               <Route exact path='/profile/edit' component={ProfileEdit} />
               <Route
-                path='/profile/:id'
+                path='/profile'
                 render={
                   (props) => <Profile {...props} profile={profile} setProfile={setProfile} />
                 }

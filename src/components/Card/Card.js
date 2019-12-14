@@ -68,6 +68,7 @@ const MegaLink = styled(Link)`
   position: absolute;
   top: 0;
   width: 100%;
+  z-index: 10;
 `;
 
 const Card = ({

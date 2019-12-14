@@ -1,5 +1,5 @@
 import faker from 'faker';
-import {sample} from 'lodash';
+import { sample, random } from 'lodash';
 import { format } from 'date-fns';
 
 /* Static data */
@@ -25,7 +25,12 @@ const instruments = [
     'id': 3,
     'name': 'keyboard',
     'display_name': 'Keyboard',
-  }
+  },
+  {
+    'id': 4,
+    'name': 'drums',
+    'display_name': 'Drums',
+  },
 ]
 
 // Styles:
@@ -77,9 +82,22 @@ const makeData = (createFunction, num = 5) => {
     .map(createFunction);
 }
 
+const createProfileInstrument = () => {
+  const instrument = sample(instruments);
+  const proficiency = sample(proficiencies);
+
+  return {
+    id: faker.random.uuid(),
+    instrument_id: instrument.id,
+    proficiency: proficiency.id,
+  }
+}
+
 // Profiles:
 const createProfile = user_id => {
   const location = `${faker.address.city()}, ${faker.address.country()}`;
+
+  const instruments = makeData(createProfileInstrument, random(5, 6));
 
   return {
     id: faker.random.uuid(),
@@ -88,6 +106,7 @@ const createProfile = user_id => {
     picture: faker.image.avatar(),
     location: location,
     bio: faker.lorem.paragraph(),
+    instruments: instruments
   }
 }
 

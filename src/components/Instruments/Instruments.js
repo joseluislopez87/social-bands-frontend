@@ -26,7 +26,7 @@ const Icon = styled.div`
   display: inline-block;
   transform: scale(${({size}) => size ? size*0.01 : '1'});
   transform-origin: top left;
-  /* NEVER change dimensions or the sprite display will break */
+  /* do not change the dimensions or the sprite display will break */
   /* use the scale transform to adjust the size of the icon */
   height: 100px;
   width: 100px;

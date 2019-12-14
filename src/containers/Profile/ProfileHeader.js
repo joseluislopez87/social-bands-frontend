@@ -26,6 +26,7 @@ const ActionsWrapper = styled.div`
 `;
 
 const Picture = styled.img`
+  background: white;
   border-radius: 100%;
   box-shadow: ${({theme}) => theme.lightShadow};
   height: 100px;
@@ -37,9 +38,9 @@ const ProfileHeader = ({ profile }) => {
     <Wrapper>
       <Name>{profile.display_name}</Name>
       <ActionsWrapper>
-        <RoundButton to='test' icon='message' />
+        <RoundButton to='test' icon='message'>test</RoundButton>
         <Picture src={profile.picture} alt='' />
-        <RoundButton to='test' icon='message' />
+        <RoundButton to='test' icon='message'>test</RoundButton>
       </ActionsWrapper>
     </Wrapper>
   )
