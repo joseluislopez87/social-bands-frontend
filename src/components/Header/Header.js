@@ -14,7 +14,7 @@ const StyledHeader = styled.header`
   border-radius: ${({showNotifications}) => showNotifications ? '0' : '0 0 1rem 1rem'};
   color: white;
   display: flex;
-  flex: 1;
+  flex: ${({showNotifications}) => showNotifications ? '1' : '0'};
   flex-direction: column;
   min-height: ${({showNotifications}) => showNotifications ? '100%' : '0'};
   position: relative;
