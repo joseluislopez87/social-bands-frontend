@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import {notifications} from 'data';
+import { notifications } from 'data';
 
 import NotificationsIcon from 'components/Notifications/NotificationsIcon';
 import NotificationsTrail from 'components/Notifications/NotificationsTrail';
@@ -52,8 +52,6 @@ const ChildrenWrapper = styled.div`
     display: none;
   }
 `;
-
-//
 
 const BadgedNotifications = withBadge(
   notifications.length,
