@@ -28,11 +28,11 @@ const NotificationsTrail = ({items}) => {
                 <Card
                   key={item.id} 
                   image={item.image}
-                  name={item.label}
+                  title={item.label}
                   text={timeFormat(item.timestamp)}
                   url={item.action_url}
                   urlLabel={item.action_label}
-                  alternateLook
+                  rounded
                   condensed
                 />
               )

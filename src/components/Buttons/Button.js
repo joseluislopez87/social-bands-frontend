@@ -12,18 +12,28 @@ const Wrapper = styled.button`
   border: 0;
   border-radius: ${em(4)};
   color: ${({secondary}) => secondary ? 'black' : 'white' };
-  font-size: ${rem(16)};
-  padding: ${em(8)} ${em(14)};
+  font-size: ${rem(15)};
+  padding: ${props => props.condensed ?
+    `${em(8)}`
+    :
+    `${em(8)} ${em(14)}`
+  };
 
   &:disabled {
     opacity: 0.6;
   }
 `;
 
-const Button = ({handleClick, secondary, children}) => {
+const Button = ({
+  handleClick,
+  secondary = false,
+  condensed = false,
+  children
+}) => {
   return(
     <Wrapper
       secondary={secondary}
+      condensed={condensed}
       onClick={handleClick}
     >
       {children}
@@ -33,6 +43,8 @@ const Button = ({handleClick, secondary, children}) => {
 
 Button.propTypes = {
   handleClick: PropTypes.func.isRequired,
+  secondary: PropTypes.bool,
+  condensed: PropTypes.bool,
   children: PropTypes.string.isRequired,
 }
 

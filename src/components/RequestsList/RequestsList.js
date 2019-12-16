@@ -19,6 +19,12 @@ const EmptyText = styled.div`
   text-align: center;
 `;
 
+const ActionsWrapper = styled.div`
+  & > * + * {
+    margin-left: 0.3em;
+  }
+`;
+
 const RequestsList = ({items}) => {
   return(
     <Wrapper>
@@ -33,20 +39,27 @@ const RequestsList = ({items}) => {
               <Card
                 key={item.id} 
                 image={profile.picture}
-                name={profile.display_name}
+                title={profile.display_name}
                 text={timeFormat(item.created_at)}
                 url={`/profile/${user.username}`}
                 urlLabel={`Go to ${profile.display_name}'s profile`}
+                roundImg
               >
-                <Button handleClick={() => console.log('accept')}>
-                  Accept
-                </Button>
-                <Button
-                  secondary
-                  handleClick={() => console.log('decline')}
-                >
-                  Decline
-                </Button>
+                <ActionsWrapper>
+                  <Button
+                    handleClick={() => console.log('accept')}
+                    condensed
+                  >
+                    Accept
+                  </Button>
+                  <Button
+                    secondary
+                    condensed
+                    handleClick={() => console.log('decline')}
+                  >
+                    Decline
+                  </Button>
+                </ActionsWrapper>
               </Card>
             );
           })

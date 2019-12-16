@@ -1,8 +1,8 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import FriendsNav from 'components/FriendsNav/FriendsNav';
 
-import {friends, conversations, requests} from 'data';
+import { friends, conversations, requests } from 'data';
 
 import FriendsList from 'components/FriendsList/FriendsList';
 import ConversationsList from 'components/ConversationsList/ConversationsList';

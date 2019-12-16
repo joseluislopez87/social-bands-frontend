@@ -1,111 +1,63 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { cover } from 'polished';
-import { Link } from 'react-router-dom';
-import Instruments from 'components/Instruments/Instruments';
-
-const Wrapper = styled.div`
-  background: white;
-  border-radius: ${props => props.condensed ? '0.2em' : '0'};
-  display: flex;
-  padding: 0.5rem 0.35rem;
-  position: relative;
-`;
-
-const ImageWrapper = styled.div`
-  border-radius: ${props => props.alternateLook ? '20%' : '100%'};
-  overflow: hidden;
-  margin-right: 0.5rem;
-  padding-bottom: ${props => props.condensed ? '50px' : '70px'};
-  position: relative;
-  width: ${props => props.condensed ? '50px' : '70px'};
-`;
-
-const Image = styled.img`
-  left: 0;
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 100%;
-`;
-
-const InfosWrapper = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-`;
-
-const ChildrenWrapper = styled.div`
-  align-items: ${props => props.childrenColumn ? 'flex-end' : 'center'};
-  display: flex;
-  flex-direction: ${props => props.childrenColumn ? 'column' : 'row'};
-  justify-content: center;
-  margin-left: auto;
-  margin-right: 0.5rem;
-  padding-left: 0.5rem;
-  z-index: 50;
-`;
-
-const Name = styled.div`
-  color: black;
-  font-size: ${props => props.condensed ? '0.95rem' : '1.1rem'};
-`;
-
-const Text = styled.div`
-  color: ${({theme}) => theme.colors.inactive};
-  font-size: ${props => props.condensed ? '0.7rem' : '0.9rem'};
-  margin-top: 0.1em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
-
-const MegaLink = styled(Link)`
-  ${cover()}
-  z-index: 10;
-`;
+import {
+  StyledCard,
+  CoverLink,
+  ImageWrapper,
+  Image,
+  Infos,
+  Name,
+  Text,
+  Children,
+} from './Card.styles';
 
 const Card = ({
   image,
-  name,
+  title,
   text,
   url,
   urlLabel,
-  instruments, 
+  slot, 
   children,
-  childrenColumn = false,
-  alternateLook = false,
+  rounded = false,
   condensed = false,
+  roundImg = false,
 }) => {
   return(
-    <Wrapper condensed={condensed}>
-      { url && <MegaLink to={url} aria-label={urlLabel} /> }
-      <ImageWrapper alternateLook={alternateLook} condensed={condensed}>
+    <StyledCard rounded={rounded} condensed={condensed}>
+      { url && <CoverLink to={url} aria-label={urlLabel} /> }
+      <ImageWrapper condensed={condensed} roundImg={roundImg}>
         <Image src={image} alt='' />
       </ImageWrapper>
-      <InfosWrapper>
-        <Name condensed={condensed}>{name}</Name>
+      <Infos>
+        <Name condensed={condensed}>
+          {title}
+        </Name>
         <Text>{text}</Text>
-        {instruments && <Instruments items={instruments} />}
-      </InfosWrapper>
-      <ChildrenWrapper childrenColumn={childrenColumn}>
+        {slot}
+      </Infos>
+      <Children>
         {children}
-      </ChildrenWrapper>
-    </Wrapper>
+      </Children>
+    </StyledCard>
   )
 }
 
 Card.propTypes = {
   image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  text: PropTypes.string,
+  slot: PropTypes.node,
   url: PropTypes.string,
-  urlLabel: PropTypes.string,
+  urlLabel: function(props, propName) {
+    if(props['url'] && props[propName] === undefined) {
+      return new Error('urlLabel is required.')
+    }
+  },
   children: PropTypes.node,
-  isSearch: PropTypes.bool,
+  rounded: PropTypes.bool,
+  condensed: PropTypes.bool,
+  roundImg: PropTypes.bool,
 }
 
 export default Card;

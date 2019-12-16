@@ -36,6 +36,12 @@ const Unreads = styled.div`
   }
 `;
 
+const InfosWrapper = styled.div`
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+`;
+
 const ConversationsList = ({items}) => {
   return(
     <Wrapper>
@@ -50,18 +56,20 @@ const ConversationsList = ({items}) => {
               <Card
                 key={item.id} 
                 image={profile.picture}
-                name={profile.display_name}
+                title={profile.display_name}
                 text={item.latest_message}
-                url={`/profile/${user.username}`}
-                urlLabel={`Go to ${profile.display_name}'s profile`}
-                childrenColumn
+                url={`/messages/${user.username}`}
+                urlLabel={`Open conversation with ${profile.display_name}`}
+                roundImg
               >
-                <LatestTime>
-                  {format(item.last_message_at, 'dd/MM/yy')}
-                </LatestTime>
-                <Unreads>
-                  {item.unreads_count > 0 && item.unreads_count}
-                </Unreads>
+                <InfosWrapper>
+                  <LatestTime>
+                    {format(item.last_message_at, 'dd/MM/yy')}
+                  </LatestTime>
+                  <Unreads>
+                    {item.unreads_count > 0 && item.unreads_count}
+                  </Unreads>
+                </InfosWrapper>
               </Card>
             );
           })

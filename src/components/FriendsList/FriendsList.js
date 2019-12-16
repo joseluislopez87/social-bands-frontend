@@ -42,10 +42,11 @@ const FriendsList = ({items}) => {
                 <Card
                   key={item.id} 
                   image={profile.picture}
-                  name={profile.display_name}
+                  title={profile.display_name}
                   text={user.is_online ? 'Online' : 'Offline'}
                   url={`/profile/${user.username}`}
                   urlLabel={`Go to ${profile.display_name}'s profile`}
+                  roundImg
                 >
                   <RoundButton
                     to={`friends/messages/${user.username}`}

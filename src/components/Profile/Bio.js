@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { rem, em } from 'polished';
 
 const Wrapper = styled.div`
   margin: 1em 0;
@@ -29,11 +30,11 @@ const BioWrapper = styled.div`
 const Button = styled.button`
   background: white;
   border: 1px solid lightgray;
-  border-radius: 0.3em;
+  border-radius: ${em(4)};
   color: black;
-  font-size: 0.9rem;
+  font-size: ${rem(14)};
   margin-left: 50%;
-  padding: 0.5em 0.9em;
+  padding: ${em(6)} ${em(10)};
   transform: translate(-50%);
 `;
 

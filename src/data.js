@@ -97,7 +97,7 @@ const createProfileInstrument = () => {
 const createProfile = user_id => {
   const location = `${faker.address.city()}, ${faker.address.country()}`;
 
-  const instruments = makeData(createProfileInstrument, random(5, 6));
+  const instruments = makeData(createProfileInstrument, random(1, 3));
 
   return {
     id: faker.random.uuid(),

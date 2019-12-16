@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { rem } from 'polished';
 import { find } from 'lodash';
 
 import { instruments as instrumentsData } from 'data';
@@ -15,7 +16,7 @@ const Wrapper = styled.div`
 `;
 
 const Name = styled.div`
-  font-size: 0.7rem;
+  font-size: ${rem(13)};
   margin-top: 0.5em;
   text-align: center;
 `;

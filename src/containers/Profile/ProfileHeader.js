@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import RoundButton from 'components/Buttons/RoundButton';
+import { rem } from 'polished';
 
 const Wrapper = styled.div`
   align-items: center;
@@ -11,7 +12,7 @@ const Wrapper = styled.div`
 
 const Name = styled.div`
   color: white;
-  font-size: 1.2rem;
+  font-size: ${rem(20)};
   font-weight: 600;
   margin-bottom: 0.5em;
   text-align: center;

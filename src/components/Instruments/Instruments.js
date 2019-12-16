@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {instruments as instrumentsData} from 'data';
+import { instruments as instrumentsData } from 'data';
 
 const Wrapper = styled.div`
   display: flex;
@@ -32,11 +32,11 @@ const Icon = styled.div`
   width: 100px;
 `;
 
-const Instruments = ({items, size = 30}) => (
+const Instruments = ({items, size = 25}) => (
   <Wrapper>
     {
       items.map(item => {
-        const instrument = instrumentsData.find(x => x.id === item.id);
+        const instrument = instrumentsData.find(x => x.id === item.instrument_id);
 
         return(
           <IconWrapper
