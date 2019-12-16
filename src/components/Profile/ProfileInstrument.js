@@ -7,6 +7,7 @@ import InstrumentIcon from 'components/Instruments/InstrumentIcon';
 import InstrumentProficiency from 'components/Instruments/InstrumentProficiency';
 
 const Wrapper = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
   margin-bottom: 1em;

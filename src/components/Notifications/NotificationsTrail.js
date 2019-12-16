@@ -17,29 +17,31 @@ const Trail = styled.div`
 
 const NotificationsTrail = ({items}) => {
   return(
-    <Trail>
-      {
-        items.length > 0 ?
-          items
-          .sort((a, b) => b.timestamp - a.timestamp)
-          .map(item => {
-            return(
-              <Card
-                key={item.id} 
-                image={item.image}
-                name={item.label}
-                text={timeFormat(item.timestamp)}
-                url={item.action_url}
-                urlLabel={item.action_label}
-                alternateLook
-                condensed
-              />
-            )
-          })
-        :
-        <h4>No notifications to show.</h4>
-      }
-    </Trail>
+    <>
+      <Trail>
+        {
+          items.length > 0 ?
+            items
+            .sort((a, b) => b.timestamp - a.timestamp)
+            .map(item => {
+              return(
+                <Card
+                  key={item.id} 
+                  image={item.image}
+                  name={item.label}
+                  text={timeFormat(item.timestamp)}
+                  url={item.action_url}
+                  urlLabel={item.action_label}
+                  alternateLook
+                  condensed
+                />
+              )
+            })
+          :
+          <h4>No notifications to show.</h4>
+        }
+      </Trail>
+    </>
   )
 }
 

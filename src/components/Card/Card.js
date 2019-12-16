@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+import { cover } from 'polished';
+import { Link } from 'react-router-dom';
 import Instruments from 'components/Instruments/Instruments';
 
 const Wrapper = styled.div`
@@ -63,11 +64,7 @@ const Text = styled.div`
 `;
 
 const MegaLink = styled(Link)`
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
+  ${cover()}
   z-index: 10;
 `;
 

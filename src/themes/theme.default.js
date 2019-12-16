@@ -37,6 +37,10 @@ const theme = {
     'blues': 'linear-gradient(.15turn, #6a11cb, #2575fc)',
   },
 
+  shadows: {
+    normal: '0px 3px 6px #6d6d6d75',
+  },
+
   lightShadow: '2px 2px 6px #02020224',
 
   // App

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled, {ThemeProvider} from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { Switch, Route, withRouter } from 'react-router-dom';
 
 import theme from 'themes/theme.default';
