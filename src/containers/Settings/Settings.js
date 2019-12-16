@@ -1,9 +1,9 @@
 import React from 'react';
-import {Formik} from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import {PageTitle} from 'styled/Headings';
-import {FormGroup, FloatingSubmitButton} from 'styled/Form';
+import { PageTitle } from 'styled/Headings';
+import { FormGroup, FloatingSubmitButton } from 'styled/Form';
 
 const ValidationSchema = Yup.object().shape({
   email: Yup.string()

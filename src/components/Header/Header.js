@@ -25,13 +25,13 @@ const StyledHeader = styled.header`
 const HeaderNav = styled.nav`
   align-items: center;
   display: flex;
-  padding: 0.7rem;
+  padding: 0.5rem;
   width: 100%;
 `;
 
 const LogoLink = styled(Link)`
   display: flex;
-  padding: 0.3rem;
+  padding: 0.5rem;
 `;
 
 const Logo = styled.img`

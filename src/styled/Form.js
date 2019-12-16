@@ -62,7 +62,7 @@ export const FloatingSubmitButton = styled.button`
   border-radius: 0.3em;
   border: 0;
   bottom: 90px;
-  box-shadow: 1px 1px 6px #82828261;
+  box-shadow: ${({theme}) => theme.shadows.normal};
   color: white;
   left: 50%;
   padding: 0.8em 1em;

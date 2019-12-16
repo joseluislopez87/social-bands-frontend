@@ -6,7 +6,7 @@ const Button = styled.button`
   background: 0;
   border: 0;
   margin-left: auto;
-  padding: 0.3rem;
+  padding: 0.5rem;
 `;
 
 const Icon = styled.img`
