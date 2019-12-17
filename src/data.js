@@ -73,6 +73,13 @@ const proficiencies = [
   },
 ]
 
+const current_user = {
+  id: 0,
+  username: 'mathieu',
+  email: 'chatillon.mathieu@gmail.com',
+  is_online: true,
+}
+
 /* Generated data */
 
 // Faker maker
@@ -161,6 +168,16 @@ const createConversation = () => {
   }
 }
 
+// Messages:
+const createMessage = (sender_user_id) => {
+  return {
+    id: faker.random.uuid(),
+    sent_at: faker.date.past(),
+    content: faker.lorem.paragraph(2),
+    sender_user_id: sender_user_id,
+  }
+}
+
 // Notifications
 const notificationsTypes = [
   'friend-request',
@@ -186,6 +203,10 @@ const friends = makeData(createFriend, 5);
 const requests = makeData(createRequest, 2);
 const conversations = makeData(createConversation);
 const notifications = makeData(createNotification, 10);
+let messages = makeData(createMessage, 10);
+let user_messages = makeData(() => createMessage(0), 10);
+
+Array.prototype.push.apply(messages, user_messages);
 
 const profiles = [];
 users.map(user =>
@@ -195,6 +216,7 @@ users.map(user =>
 
 // Export:
 export {
+  current_user,
   users,
   friends,
   notifications,
@@ -204,4 +226,5 @@ export {
   profiles,
   styles,
   proficiencies,
+  messages,
 };

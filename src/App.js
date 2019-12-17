@@ -13,6 +13,7 @@ import ProfileEdit from 'containers/Profile/ProfileEdit';
 import Profile from 'containers/Profile/Profile';
 import ProfileHeader from 'containers/Profile/ProfileHeader';
 import Settings from 'containers/Settings/Settings';
+import Messages from 'containers/Messages/Messages';
 
 const AppContainer = styled.div`
   background: ${props => props.theme.appBackground};
@@ -25,8 +26,9 @@ const AppContainer = styled.div`
 
 const Content = styled.main`
   box-sizing: border-box;
-  display: ${({showNotifications}) => showNotifications ? 'none' : 'block'};
+  display: ${({showNotifications}) => showNotifications ? 'none' : 'flex'};
   flex: 1;
+  flex-direction: column;
   margin: 1rem;
 `;
 
@@ -53,6 +55,7 @@ const App = ({ history }) => {
           <Switch>
             <Route exact path='/explore' component={Explore} />
             <Route path='/friends' component={Friends} />
+            <Route path='/messages/:username' component={Messages} />
             <Route exact path='/profile/edit' component={ProfileEdit} />
             <Route
               path='/profile'

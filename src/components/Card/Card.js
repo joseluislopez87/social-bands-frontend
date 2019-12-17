@@ -20,17 +20,20 @@ const Card = ({
   slot, 
   children,
   rounded = false,
-  condensed = false,
+  displayed,
   roundImg = false,
 }) => {
   return(
-    <StyledCard rounded={rounded} condensed={condensed}>
+    <StyledCard
+      rounded={rounded}
+      displayed={displayed}
+    >
       { url && <CoverLink to={url} aria-label={urlLabel} /> }
-      <ImageWrapper condensed={condensed} roundImg={roundImg}>
+      <ImageWrapper roundImg={roundImg} displayed={displayed}>
         <Image src={image} alt='' />
       </ImageWrapper>
       <Infos>
-        <Name condensed={condensed}>
+        <Name>
           {title}
         </Name>
         <Text>{text}</Text>
@@ -58,6 +61,7 @@ Card.propTypes = {
   rounded: PropTypes.bool,
   condensed: PropTypes.bool,
   roundImg: PropTypes.bool,
+  displayed: PropTypes.string,
 }
 
 export default Card;

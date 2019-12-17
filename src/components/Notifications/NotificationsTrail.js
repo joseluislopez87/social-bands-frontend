@@ -33,7 +33,7 @@ const NotificationsTrail = ({items}) => {
                   url={item.action_url}
                   urlLabel={item.action_label}
                   rounded
-                  condensed
+                  displayed='condensed'
                 />
               )
             })

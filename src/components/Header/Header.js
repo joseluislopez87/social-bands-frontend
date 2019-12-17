@@ -16,7 +16,7 @@ const StyledHeader = styled.header`
   display: flex;
   flex: ${({showNotifications}) => showNotifications ? '1' : '0'};
   flex-direction: column;
-  min-height: ${({showNotifications}) => showNotifications ? '100%' : '0'};
+  min-height: ${({showNotifications}) => showNotifications ? '100%' : '60px'};
   position: relative;
   width: 100%;
   z-index: ${({showNotifications}) => showNotifications ? '1000' : 'auto'};

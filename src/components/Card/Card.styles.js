@@ -1,8 +1,18 @@
 import styled from 'styled-components';
 import { cover } from 'polished';
-import device from 'themes/devices';
 
 import { Link } from 'react-router-dom';
+
+const handleDisplayed = displayed => {
+  switch(displayed) {
+    case 'compressed':
+      return '0';
+    case 'condensed':
+      return '0.3rem';
+    default:
+      return '0.5rem 0.35rem';
+  }
+}
 
 export const StyledCard = styled.div`
   background: white;
@@ -11,24 +21,29 @@ export const StyledCard = styled.div`
   box-shadow: ${props => props.rounded ?
     '1px 1px 6px #a5a3a336' : '0'};
   display: flex;
-  padding: 0.5rem 0.35rem;
+  padding: ${({displayed}) => handleDisplayed(displayed)};
   position: relative;
-
-  @media ${device.large} {
-    display: none;
-  }
 `;
+
+const handleWidth = displayed => {
+  switch(displayed) {
+    case 'compressed':
+      return '30px';
+    case 'condensed':
+      return '50px';
+    default:
+      return '75px';
+  }
+}
 
 export const ImageWrapper = styled.div`
   border-radius: ${props => props.roundImg ?
     '100%' : '1.5em'};
   overflow: hidden;
   margin-right: 0.5rem;
-  padding-bottom: ${props => props.condensed ?
-    '50px' : '75px'};
+  padding-bottom: ${({displayed}) => handleWidth(displayed)};
   position: relative;
-  width: ${props => props.condensed ?
-    '50px' : '75px'};
+  width: ${({displayed}) => handleWidth(displayed)};
 `;
 
 export const Image = styled.img`
