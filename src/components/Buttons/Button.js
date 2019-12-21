@@ -1,23 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { rem, em, darken } from 'polished';
+import { rem, em } from 'polished';
+
+const paddings = {
+  default: `${em(8)}`,
+  small: `${em(8)} ${em(14)}`,
+  large: `${em(14)}`,
+}
 
 const Wrapper = styled.button`
   background: ${({secondary}) =>
     secondary ?
       '#f1e9e9' :
-      `linear-gradient(#ff512f, ${darken(0.1, '#ff512f')})`
+      '#ff512f'
   };
   border: 0;
   border-radius: ${em(4)};
   color: ${({secondary}) => secondary ? 'black' : 'white' };
   font-size: ${rem(15)};
-  padding: ${props => props.condensed ?
-    `${em(8)}`
-    :
-    `${em(8)} ${em(14)}`
-  };
+  padding: ${props => paddings[props.size]};
+  width: ${props => props.fullWidth ? '100%' : 'auto'};
 
   &:disabled {
     opacity: 0.6;
@@ -27,14 +30,16 @@ const Wrapper = styled.button`
 const Button = ({
   handleClick,
   secondary = false,
-  condensed = false,
+  fullWidth = false,
+  size = 'default',
   children
 }) => {
   return(
     <Wrapper
       secondary={secondary}
-      condensed={condensed}
       onClick={handleClick}
+      size={size}
+      fullWidth={fullWidth}
     >
       {children}
     </Wrapper>
@@ -44,7 +49,7 @@ const Button = ({
 Button.propTypes = {
   handleClick: PropTypes.func.isRequired,
   secondary: PropTypes.bool,
-  condensed: PropTypes.bool,
+  size: PropTypes.string,
   children: PropTypes.string.isRequired,
 }
 

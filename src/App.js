@@ -15,6 +15,8 @@ import ProfileHeader from 'containers/Profile/ProfileHeader';
 import Settings from 'containers/Settings/Settings';
 import Messages from 'containers/Messages/Messages';
 
+import Splash from 'containers/Login/Splash';
+
 const AppContainer = styled.div`
   background: ${props => props.theme.appBackground};
   display: flex;
@@ -35,6 +37,7 @@ const Content = styled.main`
 const App = ({ history }) => {
   const [showNotifications, toggleNotifications] = useState(false);
   const [profile, setProfile] = useState({});
+  const [loggedIn, setLoggedIn] = useState(true);
 
   history.listen(() => {
     toggleNotifications(false);
@@ -43,32 +46,37 @@ const App = ({ history }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <AppContainer>
-        <Header showNotifications={showNotifications} toggleNotifications={toggleNotifications}>
-          <Route
-              path='/profile'
-              render={() => <ProfileHeader profile={profile} />}
-            />
-        </Header>
-        <Content showNotifications={showNotifications}>
-          
-          <Switch>
-            <Route exact path='/explore' component={Explore} />
-            <Route path='/friends' component={Friends} />
-            <Route path='/messages/:username' component={Messages} />
-            <Route exact path='/profile/edit' component={ProfileEdit} />
-            <Route
-              path='/profile'
-              render={
-                (props) => <Profile {...props} profile={profile} setProfile={setProfile} />
-              }
-            />
-            <Route path='/settings' component={Settings} />
-          </Switch>
+      {
+        loggedIn ?
+          <AppContainer>
+            <Header showNotifications={showNotifications} toggleNotifications={toggleNotifications}>
+              <Route
+                  path='/profile'
+                  render={() => <ProfileHeader profile={profile} />}
+                />
+            </Header>
+            <Content showNotifications={showNotifications}>
+              
+              <Switch>
+                <Route exact path='/explore' component={Explore} />
+                <Route path='/friends' component={Friends} />
+                <Route path='/messages/:username' component={Messages} />
+                <Route exact path='/profile/edit' component={ProfileEdit} />
+                <Route
+                  path='/profile/:username'
+                  render={
+                    (props) => <Profile {...props} profile={profile} setProfile={setProfile} />
+                  }
+                />
+                <Route path='/settings' component={Settings} />
+              </Switch>
 
-        </Content>
-        <NavBar />
-      </AppContainer>
+            </Content>
+            <NavBar />
+          </AppContainer>
+        :
+        <Splash handleLogin={() => setLoggedIn(true)} />
+      }
     </ThemeProvider>
   );
 }

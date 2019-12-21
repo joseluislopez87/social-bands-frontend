@@ -1,12 +1,11 @@
-import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import timeFormat from 'utils/date';
 
 import MessagesInfos from 'components/Messages/MessagesInfos';
 import Message from 'components/Messages/Message';
 
-import { messages, current_user } from 'data';
+import { messages as importedMessages, current_user } from 'data';
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,21 +27,28 @@ const MessageInput = styled.input`
 `;
 
 const Messages = () => {
+  const [messages, setMessages] = useState([]);
   const messagesEnd = useRef(null);
 
   const scrollToBottom = () => {
     messagesEnd.current.scrollIntoView();
   }
 
-  useEffect(scrollToBottom, []);
+  useEffect(() => {
+    setMessages(importedMessages);
+  }, [setMessages]);
+
+  useEffect(scrollToBottom, [messages]);
 
   return(
     <Wrapper>
       <MessagesInfos />
       <MessagesTrail>
         {
+          !messages.length ?
+          'No messages to show'
+          :
           messages
-            .sort((a, b) => a.sent_at > b.sent_at ? 1 : -1)
             .map(message =>
               <Message
                 key={message.id}

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {Field} from 'formik';
+import { Field } from 'formik';
+import { hideVisually } from 'polished';
 
 export const TextField = styled(Field)`
   background: white;
@@ -18,6 +19,7 @@ const FormGroupWrapper = styled.div`
 
 const Label = styled.label`
   margin-bottom: 0.3em;
+  ${props => props.hideLabel && hideVisually()}
 `;
 
 const Informations = styled.div`
@@ -34,15 +36,18 @@ export const FormGroup = ({
   id,
   label,
   type,
+  placeholder,
   informations,
+  hideLabel = false,
   children
 }) => (
   <FormGroupWrapper>
-    <Label htmlFor={id}>{label}</Label>
+    <Label htmlFor={id} hideLabel={hideLabel}>{label}</Label>
     <TextField
       id={id}
       type={type}
       name={id}
+      placeholder={placeholder}
     />
     {children}
     <Informations>{informations}</Informations>

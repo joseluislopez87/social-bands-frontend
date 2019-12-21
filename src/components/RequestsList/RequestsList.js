@@ -1,12 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Card from 'components/Card/Card';
 import Button from 'components/Buttons/Button';
-import {find} from 'lodash';
-
-import {users, profiles} from 'data';
+import axios from 'axios';
 import timeFormat from 'utils/date';
+
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,24 +23,29 @@ const ActionsWrapper = styled.div`
   }
 `;
 
-const RequestsList = ({items}) => {
+const RequestsList = () => {
+  const [requests, setRequests] = useState([]);
+
+  useEffect(() => {
+    const fetchRequests = async () => {
+      const data = await axios('http://localhost:3004/requests?for_user_id=0&_sort=created_at&_order=desc');
+      setRequests(data.data);
+    }
+    fetchRequests();
+  }, []);
+
   return(
     <Wrapper>
       {
-        items.length > 0 ?
-          items.map(item => {
-            // get item's user data:
-            const user = find(users, {id: item.from_user_id});
-            const profile = find(profiles, {user_id: user.id})
+        requests.length > 0 ?
+          requests.map(request => {
 
             return(
               <Card
-                key={item.id} 
-                image={profile.picture}
-                title={profile.display_name}
-                text={timeFormat(item.created_at)}
-                url={`/profile/${user.username}`}
-                urlLabel={`Go to ${profile.display_name}'s profile`}
+                key={request.id} 
+                image={request.image}
+                title={request.title}
+                text={timeFormat(request.created_at)}
                 roundImg
               >
                 <ActionsWrapper>
@@ -68,10 +71,6 @@ const RequestsList = ({items}) => {
       }
     </Wrapper>
   )
-}
-
-RequestsList.propTypes = {
-  items: PropTypes.array.isRequired,
 }
 
 export default RequestsList;

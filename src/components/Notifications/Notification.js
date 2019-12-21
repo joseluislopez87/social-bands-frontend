@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-const Notification = ({data}) => {
+const Notification = ({ data }) => {
   return(
     <Wrapper>
       {data.type}

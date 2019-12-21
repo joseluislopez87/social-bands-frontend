@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-//import { useParams } from 'react-router-dom';
-import { sample, find } from 'lodash';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
-import { users, profiles } from 'data';
 import Bio from 'components/Profile/Bio';
 import MusicStyle from 'components/Profile/MusicStyle';
 import ProfileSection from 'components/Profile/ProfileSection';
@@ -20,15 +19,20 @@ const descProficiency = (a, b) => {
   return 1;
 }
 
-const Profile = ({profile, setProfile}) => {
-  const user = sample(users);
+const Profile = ({ profile, setProfile }) => {
+  let { username } = useParams();
 
-  if(!profile.hasOwnProperty('id')) {
-    setProfile(find(profiles, {user_id: user.id}));
-  }
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const result = await axios(`http://localhost:3004/users?username=${username}`);
+      setProfile(result.data[0].profile);
+    }
+    fetchProfile();
+  }, [setProfile, username])
 
   return(
-    <>
+    profile ?
+      <>
       <Location>{profile.location}</Location>
       <Bio>{profile.bio ? profile.bio : ''}</Bio>
       <ProfileSection title='Instruments'>
@@ -53,6 +57,8 @@ const Profile = ({profile, setProfile}) => {
         <MusicStyle value='blues'>blues</MusicStyle>
       </ProfileSection>
     </>
+    :
+    <h4>ok</h4>
   );
 }
 

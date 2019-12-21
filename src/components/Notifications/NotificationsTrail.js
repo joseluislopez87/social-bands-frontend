@@ -15,27 +15,26 @@ const Trail = styled.div`
   }
 `;
 
-const NotificationsTrail = ({items}) => {
+const NotificationsTrail = ({ notifications }) => {
   return(
     <>
       <Trail>
         {
-          items.length > 0 ?
-            items
-            .sort((a, b) => b.timestamp - a.timestamp)
-            .map(item => {
-              return(
-                <Card
-                  key={item.id} 
-                  image={item.image}
-                  title={item.label}
-                  text={timeFormat(item.timestamp)}
-                  url={item.action_url}
-                  urlLabel={item.action_label}
-                  rounded
-                  displayed='condensed'
-                />
-              )
+          notifications.length > 0 ?
+            notifications
+              .map(notification => {
+                return(
+                  <Card
+                    key={notification.id} 
+                    image={notification.image}
+                    title={notification.title}
+                    text={timeFormat(notification.created_at)}
+                    url={notification.action_link}
+                    urlLabel={notification.action_label}
+                    rounded
+                    displayed='condensed'
+                  />
+                )
             })
           :
           <h4>No notifications to show.</h4>
@@ -46,7 +45,7 @@ const NotificationsTrail = ({items}) => {
 }
 
 NotificationsTrail.propTypes = {
-  items: PropTypes.array.isRequired,
+  notifications: PropTypes.array.isRequired,
 }
 
 export default NotificationsTrail;

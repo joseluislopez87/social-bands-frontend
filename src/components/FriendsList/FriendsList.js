@@ -1,11 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Card from 'components/Card/Card';
 import RoundButton from 'components/Buttons/RoundButton';
-import {find} from 'lodash';
-
-import {users, profiles} from 'data';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,40 +16,43 @@ const EmptyText = styled.div`
 `;
 
 const sortByStatus = (a, b) => {
-  const a_infos = find(users, {id: a.friend_user_id});
-  const b_infos = find(users, {id: b.friend_user_id});
-
-  if(a_infos.is_online > b_infos.is_online) return -1;
+  if(a.is_online > b.is_online) return -1;
   return 1;
 }
 
-const FriendsList = ({items}) => {
+const FriendsList = () => {
+  const [friends, setFriends] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios('http://localhost:3004/users/0');
+      setFriends(result.data.friends);
+    }
+    fetchData();
+  }, []);
+
   return(
     <Wrapper>
       {
-        items ?
-          items
+        friends ?
+          friends
             .sort((a, b) => sortByStatus(a, b))
-            .map(item => {
-              // get item's user data:
-              const user = find(users, {id: item.friend_user_id});
-              const profile = find(profiles, {user_id: user.id})
-
+            .map(friend => {
               return(
                 <Card
-                  key={item.id} 
-                  image={profile.picture}
-                  title={profile.display_name}
-                  text={user.is_online ? 'Online' : 'Offline'}
-                  url={`/profile/${user.username}`}
-                  urlLabel={`Go to ${profile.display_name}'s profile`}
+                  key={friend.id} 
+                  image={friend.profile.picture}
+                  title={friend.profile.display_name}
+                  text={friend.is_online ? 'Online' : 'Offline'}
+                  url={`/profile/${friend.username}`}
+                  urlLabel={`Go to ${friend.profile.display_name}'s profile`}
                   roundImg
                 >
                   <RoundButton
-                    to={`friends/messages/${user.username}`}
+                    to={`/messages/${friend.username}`}
                     icon='/icons/chat.svg'
                   >
-                    {`Open chat conversation with ${profile.display_name}`}
+                    {`Open chat conversation with ${friend.profile.display_name}`}
                   </RoundButton>
                 </Card>
               );
@@ -62,10 +62,6 @@ const FriendsList = ({items}) => {
       }
     </Wrapper>
   )
-}
-
-FriendsList.propTypes = {
-  items: PropTypes.array.isRequired,
 }
 
 export default FriendsList;

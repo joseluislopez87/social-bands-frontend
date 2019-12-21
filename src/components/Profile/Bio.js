@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 
 const BioWrapper = styled.div`
   display: flex;
-  max-height: ${({extended}) => extended ? 'auto' : '60px'};
+  max-height: ${({extended}) => extended ? 'auto' : '100px'};
   margin-bottom: ${({extended}) => extended ? '0.5em' : '0'};;
   position: relative;
   overflow: hidden;

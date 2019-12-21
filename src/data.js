@@ -8,28 +8,23 @@ import { format } from 'date-fns';
 const instruments = [
   {
     'id': 0,
-    'name': 'guitar-acoustic',
-    'display_name': 'Acoustic guitar',
+    'name': 'guitar-acoustic'
   },
   {
     'id': 1,
-    'name': 'guitar-electric',
-    'display_name': 'Electric guitar',
+    'name': 'guitar-electric'
   },
   {
     'id': 2,
-    'name': 'guitar-bass',
-    'display_name': 'Bass guitar',
+    'name': 'guitar-bass'
   },
   {
     'id': 3,
-    'name': 'keyboard',
-    'display_name': 'Keyboard',
+    'name': 'keyboard'
   },
   {
     'id': 4,
-    'name': 'drums',
-    'display_name': 'Drums',
+    'name': 'drums'
   },
 ]
 
@@ -203,10 +198,11 @@ const friends = makeData(createFriend, 5);
 const requests = makeData(createRequest, 2);
 const conversations = makeData(createConversation);
 const notifications = makeData(createNotification, 10);
-let messages = makeData(createMessage, 10);
-let user_messages = makeData(() => createMessage(0), 10);
 
-Array.prototype.push.apply(messages, user_messages);
+const received_messages = makeData(createMessage, 10);
+const sent_messages = makeData(() => createMessage(0), 10);
+
+const messages = received_messages.concat(sent_messages).sort((a, b) => a.sent_at > b.sent_at ? 1 : -1);
 
 const profiles = [];
 users.map(user =>

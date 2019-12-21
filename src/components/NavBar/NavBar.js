@@ -26,10 +26,10 @@ const NavBar = () => (
       Explore
     </NavBarItem>
     <NavBarItem
-      to='/friends'
+      to='/friends/messages'
       icon='messages'
     >
-      Friends
+      Messages
     </NavBarItem>
     <NavBarItem
       to='/profile'

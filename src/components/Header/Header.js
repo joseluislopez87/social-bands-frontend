@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
-import { notifications } from 'data';
+import axios from 'axios';
 
 import NotificationsIcon from 'components/Notifications/NotificationsIcon';
 import NotificationsTrail from 'components/Notifications/NotificationsTrail';
@@ -54,11 +53,21 @@ const ChildrenWrapper = styled.div`
 `;
 
 const BadgedNotifications = withBadge(
-  notifications.length,
+  0,
   StyledBadge)
   (NotificationsIcon);
 
 const Header = ({showNotifications, toggleNotifications, children}) => {
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      const data = await axios('http://localhost:3004/notifications?for_user_id=0&_sort=created_at&_order=desc');
+      setNotifications(data.data);
+    }
+    fetchNotifications();
+  }, [])
+
   return(
   <StyledHeader role='banner' showNotifications={showNotifications}>
     <HeaderNav>
@@ -73,7 +82,7 @@ const Header = ({showNotifications, toggleNotifications, children}) => {
       {
         showNotifications ?
           <NotificationsTrail
-            items={notifications}
+            notifications={notifications}
           />
         :
           children

@@ -1,11 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Card from 'components/Card/Card';
-import {find} from 'lodash';
-import {format} from 'date-fns';
-
-import {users, profiles} from 'data';
+import axios from 'axios';
+import timeFormat from 'utils/date';
 
 const Wrapper = styled.div`
   display: flex;
@@ -42,32 +39,37 @@ const InfosWrapper = styled.div`
   flex-direction: column;
 `;
 
-const ConversationsList = ({items}) => {
+const ConversationsList = () => {
+  const [conversations, setConversations] = useState([]);
+
+  useEffect(() => {
+    const fetchConversations = async () => {
+      const result = await axios('http://localhost:3004/conversations');
+      setConversations(result.data);
+    }
+    fetchConversations();
+  }, []);
+
   return(
     <Wrapper>
       {
-        items ?
-          items.map(item => {
-            // get item's user data:
-            const user = find(users, {id: item.contact_user_id});
-            const profile = find(profiles, {user_id: user.id})
+        conversations ?
+          conversations.map(conversation => {
 
             return(
               <Card
-                key={item.id} 
-                image={profile.picture}
-                title={profile.display_name}
-                text={item.latest_message}
-                url={`/messages/${user.username}`}
-                urlLabel={`Open conversation with ${profile.display_name}`}
+                key={conversation.id} 
+                image={conversation.friend.profile.picture}
+                title={conversation.friend.profile.display_name}
+                text={conversation.latest_preview}
                 roundImg
               >
                 <InfosWrapper>
                   <LatestTime>
-                    {format(item.last_message_at, 'dd/MM/yy')}
+                    {timeFormat(conversation.latest_at, 'dd/MM/yy')}
                   </LatestTime>
                   <Unreads>
-                    {item.unreads_count > 0 && item.unreads_count}
+                    {conversation.unreads > 0 && conversation.unreads}
                   </Unreads>
                 </InfosWrapper>
               </Card>
@@ -78,10 +80,6 @@ const ConversationsList = ({items}) => {
       }
     </Wrapper>
   )
-}
-
-ConversationsList.propTypes = {
-  items: PropTypes.array.isRequired,
 }
 
 export default ConversationsList;
