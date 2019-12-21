@@ -9,7 +9,7 @@ const StyledWrapper = styled(Wrapper)`
 const StyledMenu = styled(Menu)`
   position: absolute;
   right: 0;
-  width: 140px;
+  width: 160px;
   background: white;
   border-radius: 0.2em;
   box-shadow: ${({theme}) => theme.shadows.normal};
@@ -44,10 +44,7 @@ export default function Dropdown() {
             See Profile
           </StyledMenuItem>
           <StyledMenuItem>
-            Add to Friends
-          </StyledMenuItem>
-          <StyledMenuItem>
-            Block User
+            Remove from friends
           </StyledMenuItem>
         </MenuItemsWrapper>
       </StyledMenu>

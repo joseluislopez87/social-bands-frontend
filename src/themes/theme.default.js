@@ -38,6 +38,7 @@ const theme = {
   },
 
   shadows: {
+    light: '0px 3px 6px #6d6d6d21',
     normal: '0px 3px 6px #6d6d6d75',
   },
 
