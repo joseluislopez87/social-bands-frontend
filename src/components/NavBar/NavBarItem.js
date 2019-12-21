@@ -29,7 +29,7 @@ const Image = styled.img`
   width: 32px;
 `;
 
-export default function NavBarItem({to, icon, children}) {
+export default function NavBarItem({ exact, to, icon, children }) {
   const [isActive, setActive] = useState(false);
 
   const inactiveIcon = `/icons/nav/${icon}.svg`;
@@ -38,6 +38,7 @@ export default function NavBarItem({to, icon, children}) {
   return(
     <StyledNavLink
       to={to}
+      exact={exact}
       isActive={(match) => {
         match ? setActive(true) : setActive(false);
 

@@ -39,7 +39,6 @@ const FriendsNav = () => {
 
   return(
     <Nav aria-label='Secondary navigation'>
-      <StyledNavLink to={`${url}/messages`}>Messages</StyledNavLink>
       <StyledNavLink exact to={`${url}`}>Friends</StyledNavLink>
       <StyledNavLink to={`${url}/requests`}>Requests</StyledNavLink>
     </Nav>

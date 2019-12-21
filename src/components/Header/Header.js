@@ -52,13 +52,13 @@ const ChildrenWrapper = styled.div`
   }
 `;
 
-const BadgedNotifications = withBadge(
-  0,
-  StyledBadge)
-  (NotificationsIcon);
-
 const Header = ({showNotifications, toggleNotifications, children}) => {
   const [notifications, setNotifications] = useState([]);
+
+  const BadgedNotifications = withBadge(
+    notifications.length,
+    StyledBadge)
+    (NotificationsIcon);
 
   useEffect(() => {
     const fetchNotifications = async () => {

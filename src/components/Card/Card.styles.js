@@ -30,9 +30,9 @@ const handleWidth = displayed => {
     case 'compressed':
       return '30px';
     case 'condensed':
-      return '50px';
+      return '60px';
     default:
-      return '75px';
+      return '70px';
   }
 }
 

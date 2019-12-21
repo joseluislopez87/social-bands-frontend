@@ -58,12 +58,12 @@ const App = ({ history }) => {
             <Content showNotifications={showNotifications}>
               
               <Switch>
-                <Route exact path='/explore' component={Explore} />
+                <Route exact path='/' component={Explore} />
                 <Route path='/friends' component={Friends} />
-                <Route path='/messages/:username' component={Messages} />
+                <Route path='/messages/:username?' component={Messages} />
                 <Route exact path='/profile/edit' component={ProfileEdit} />
                 <Route
-                  path='/profile/:username'
+                  path='/profile/:username?'
                   render={
                     (props) => <Profile {...props} profile={profile} setProfile={setProfile} />
                   }

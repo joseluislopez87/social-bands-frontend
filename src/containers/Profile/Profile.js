@@ -21,14 +21,15 @@ const descProficiency = (a, b) => {
 
 const Profile = ({ profile, setProfile }) => {
   let { username } = useParams();
+  const request = `http://localhost:3004/users?username=${username || 'test'}`;
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const result = await axios(`http://localhost:3004/users?username=${username}`);
+      const result = await axios(request);
       setProfile(result.data[0].profile);
     }
     fetchProfile();
-  }, [setProfile, username])
+  }, [setProfile, username, request])
 
   return(
     profile ?

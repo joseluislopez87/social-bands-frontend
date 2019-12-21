@@ -28,23 +28,26 @@ const Infos = styled.div`
   margin: 0 0.5em;
 `;
 
-const Actions = styled.div``;
+const Actions = styled.div`
+  margin-right: 0.5em;
+`;
 
-export default function MessagesInfos() {
+export default function MessagesInfos({ friend }) {
   return(
-    <Wrapper>
-      <Return to='/friends/messages' />
-      <Infos>
-        <Card
-          image='https://placehold.it/200x200'
-          title='Amanda'
-          roundImg
-          displayed='compressed'
-        />
-      </Infos>
-      <Actions>
-        <Dropdown />
-      </Actions>
-    </Wrapper>
+    friend.hasOwnProperty('id') &&
+      <Wrapper>
+        <Return to='/friends/messages' />
+        <Infos>
+          <Card
+            image={friend.picture}
+            title={friend.display_name}
+            roundImg
+            displayed='compressed'
+          />
+        </Infos>
+        <Actions>
+          <Dropdown />
+        </Actions>
+      </Wrapper>
   )
 }

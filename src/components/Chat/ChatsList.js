@@ -39,7 +39,7 @@ const InfosWrapper = styled.div`
   flex-direction: column;
 `;
 
-const ConversationsList = () => {
+export default function ChatsList() {
   const [conversations, setConversations] = useState([]);
 
   useEffect(() => {
@@ -84,5 +84,3 @@ const ConversationsList = () => {
     </Wrapper>
   )
 }
-
-export default ConversationsList;

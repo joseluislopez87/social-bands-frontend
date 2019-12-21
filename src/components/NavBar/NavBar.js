@@ -20,22 +20,23 @@ const Nav = styled.nav`
 const NavBar = () => (
   <Nav aria-label='Main navigation'>
     <NavBarItem
-      to='/explore'
+      exact
+      to='/'
       icon='explore'
     >
       Explore
     </NavBarItem>
     <NavBarItem
-      to='/friends/messages'
+      to='/messages'
       icon='messages'
     >
       Messages
     </NavBarItem>
     <NavBarItem
-      to='/profile'
+      to='/friends'
       icon='profile'
     >
-      Profile
+      Friends
     </NavBarItem>
     <NavBarItem
       to='/settings'
