@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Switch, Route, withRouter } from 'react-router-dom';
+import { SWRConfig } from 'swr';
 
 import theme from 'themes/theme.default';
 
@@ -16,6 +17,7 @@ import Settings from 'containers/Settings/Settings';
 import Messages from 'containers/Messages/Messages';
 
 import Splash from 'containers/Login/Splash';
+import axios from 'axios';
 
 const AppContainer = styled.div`
   background: ${props => props.theme.appBackground};
@@ -45,39 +47,43 @@ const App = ({ history }) => {
   });
 
   return (
-    <ThemeProvider theme={theme}>
-      {
-        loggedIn ?
-          <AppContainer>
-            <Header showNotifications={showNotifications} toggleNotifications={toggleNotifications}>
-              <Route
-                  path='/profile'
-                  render={() => <ProfileHeader profile={profile} />}
-                />
-            </Header>
-            <Content showNotifications={showNotifications}>
-              
-              <Switch>
-                <Route exact path='/' component={Explore} />
-                <Route path='/friends' component={Friends} />
-                <Route path='/messages/:username?' component={Messages} />
-                <Route exact path='/profile/edit' component={ProfileEdit} />
+    <SWRConfig value={{
+      fetcher: url => axios(url).then(response => response)
+    }}>
+      <ThemeProvider theme={theme}>
+        {
+          loggedIn ?
+            <AppContainer>
+              <Header showNotifications={showNotifications} toggleNotifications={toggleNotifications}>
                 <Route
-                  path='/profile/:username?'
-                  render={
-                    (props) => <Profile {...props} profile={profile} setProfile={setProfile} />
-                  }
-                />
-                <Route path='/settings' component={Settings} />
-              </Switch>
+                    path='/profile'
+                    render={() => <ProfileHeader profile={profile} />}
+                  />
+              </Header>
+              <Content showNotifications={showNotifications}>
+                
+                <Switch>
+                  <Route exact path='/' component={Explore} />
+                  <Route path='/friends' component={Friends} />
+                  <Route path='/messages/:username?' component={Messages} />
+                  <Route exact path='/profile/edit' component={ProfileEdit} />
+                  <Route
+                    path='/profile/:username?'
+                    render={
+                      (props) => <Profile {...props} profile={profile} setProfile={setProfile} />
+                    }
+                  />
+                  <Route path='/settings' component={Settings} />
+                </Switch>
 
-            </Content>
-            <NavBar />
-          </AppContainer>
-        :
-        <Splash handleLogin={() => setLoggedIn(true)} />
-      }
-    </ThemeProvider>
+              </Content>
+              <NavBar />
+            </AppContainer>
+          :
+          <Splash handleLogin={() => setLoggedIn(true)} />
+        }
+      </ThemeProvider>
+    </SWRConfig>
   );
 }
 
