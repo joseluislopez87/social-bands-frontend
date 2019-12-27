@@ -52,30 +52,54 @@ const LoadingText = styled.div`
   text-align: center;
 `;
 
-const scrollToRef = (containerRef, ref) => {
-  containerRef.current.scrollTo(0, ref.current.offsetTop);
-};
-
-function Chat({ username }) {
+export default function Chat({ username }) {
   const [isLoading, setIsLoading] = useState(true);
   const [profile, setProfile] = useState({});
   const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState('');
+
   const trail = useRef(null);
   const latestMessage = useRef(null);
 
   useEffect(() => {
-    const fetchMessages = async () => {
+    async function fetchMessages() {
       axios.get(`http://localhost:3004/messages/?friend.username=${username}`)
         .then(response => {
           setMessages(response.data[0].messages);
           setProfile(response.data[0].friend.profile);
           setIsLoading(false);
-          scrollToRef(trail, latestMessage);
+          latestMessage.current.scrollIntoView();
         })
         .catch(error => console.log(error));
     }
     fetchMessages();
   }, [username]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+  
+    const time = new Date().toISOString();
+
+    const newMessageObject = {
+      id: messages.length,
+      created_at: time,
+      sent: true,
+      content: newMessage,
+    }
+
+    setNewMessage('');
+    setMessages([...messages, newMessageObject]);
+  }
+
+  useEffect(() => {
+    if(latestMessage.current !== null) {
+      latestMessage.current.scrollIntoView();
+    }
+  }, [messages]);
+
+  function handleChange(e) {
+    setNewMessage(e.target.value);
+  }
 
   return(
     !isLoading ?
@@ -87,6 +111,7 @@ function Chat({ username }) {
             'No messages to show'
             :
             messages
+              .sort((a, b) => a.created_at > b.created_at)
               .map(message =>
                 <Message
                   key={message.id}
@@ -99,8 +124,8 @@ function Chat({ username }) {
           }
           <div ref={latestMessage}></div>
         </MessagesTrail>
-        <form>
-          <MessageInput placeholder='Type in your message' />
+        <form onSubmit={handleSubmit}>
+          <MessageInput placeholder='Type in your message' value={newMessage} onChange={e => handleChange(e)} />
         </form>
       </Wrapper>
     :
@@ -110,5 +135,3 @@ function Chat({ username }) {
       </LoadingWrapper>
   )
 }
-
-export default Chat;
