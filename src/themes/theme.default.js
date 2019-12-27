@@ -35,6 +35,7 @@ const theme = {
 
   styles: {
     'blues': 'linear-gradient(.15turn, #6a11cb, #2575fc)',
+    'rock': 'linear-gradient(.4turn, #ff0844, #ffb199)',
   },
 
   shadows: {

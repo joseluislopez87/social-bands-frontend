@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import RoundButton from 'components/Buttons/RoundButton';
 import { rem } from 'polished';
 
 const Wrapper = styled.div`
@@ -15,13 +14,14 @@ const Name = styled.div`
   font-size: ${rem(20)};
   font-weight: 600;
   margin-bottom: 0.5em;
+  height: 25px;
   text-align: center;
 `;
 
 const ActionsWrapper = styled.div`
   align-items: center;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: -15%;
   width: 70%;
 `;
@@ -39,9 +39,7 @@ const ProfileHeader = ({ profile }) => {
     <Wrapper>
       <Name>{profile.display_name}</Name>
       <ActionsWrapper>
-        <RoundButton to='test' icon='message'>test</RoundButton>
         <Picture src={profile.picture} alt='' />
-        <RoundButton to='test' icon='message'>test</RoundButton>
       </ActionsWrapper>
     </Wrapper>
   )
