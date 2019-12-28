@@ -2,8 +2,8 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import FriendsNav from 'components/FriendsNav/FriendsNav';
 
-import FriendsList from 'components/FriendsList/FriendsList';
-import RequestsList from 'components/RequestsList/RequestsList';
+import {Friends as FriendsList} from 'components/Friends/Friends';
+import Requests from 'components/Requests/Requests';
 
 const Friends = () => {
   return(
@@ -11,11 +11,10 @@ const Friends = () => {
       <FriendsNav />
       <Switch>
         <Route exact path='/friends'>
-          <FriendsList
-          />
+          <FriendsList />
         </Route>
         <Route exact path='/friends/requests'>
-          <RequestsList
+          <Requests
             emptyText='No friends to show.'
           />
         </Route>
