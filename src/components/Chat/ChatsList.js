@@ -4,8 +4,8 @@ import Styled from './ChatsList.styles';
 
 import timeFormat from 'utils/date';
 import Fetcher from 'utils/Fetcher';
-import EmptyNotice from 'components/shared/EmptyNotice';
 
+import EmptyNotice from 'components/shared/EmptyNotice';
 import Card from 'components/Card/Card';
 
 export default function ChatsList() {
