@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import FriendsNav from 'components/FriendsNav/FriendsNav';
 
-import {Friends as FriendsList} from 'components/Friends/Friends';
-import Requests from 'components/Requests/Requests';
+import FriendsNav from 'components/FriendsNav';
+import { Friends as FriendsList } from 'components/Friends';
+import Requests from 'components/Requests';
 
 const Friends = () => {
   return(
