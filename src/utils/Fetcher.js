@@ -5,11 +5,18 @@ import axios from 'axios';
 import Loading from 'components/Loading';
 import Error from './Error';
 
+const defaultEmptyText = 'Nothing to show.';
+
 const defaultOptions = {
   customLoading: undefined,
 }
 
-export default function Fetcher({ request, children, emptyText = 'Nothing to display', options = defaultOptions }) {
+export default function Fetcher({
+  request,
+  children,
+  emptyText = defaultEmptyText,
+  options = defaultOptions
+}) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
