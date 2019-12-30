@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const StyledNavLink = styled(NavLink)`
   align-items: center;
