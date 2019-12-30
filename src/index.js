@@ -5,11 +5,23 @@ import 'normalize.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { IntlProvider } from 'react-intl';
+import flattenMessages from './utils/flattenMessages';
+
+import messages from 'messages';
+
+let locale =
+  (navigator.languages && navigator.languages[0])
+  || navigator.language
+  || navigator.userLanguage
+  || 'en-US';
 
 const Unison = () => (
-  <Router>
-    <App></App>
-  </Router>
+  <IntlProvider locale={locale} messages={flattenMessages(messages[locale])}>
+    <Router>
+      <App></App>
+    </Router>
+  </IntlProvider>
 )
 
 ReactDOM.render(<Unison />, document.getElementById('root'));
