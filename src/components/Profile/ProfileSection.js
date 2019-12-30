@@ -1,31 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  margin: 1em 0;
-`;
+import Styled from './ProfileSection.styles';
 
-const Title = styled.h2`
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 0.5em;
-  margin-top: 0;
-`;
-
-const Children = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const ProfileSection = ({title, children}) => {
+export default function ProfileSection({title, children}) {
   return(
-    <Wrapper>
-      <Title>{title}</Title>
-      <Children>
+    <Styled.ProfileSection>
+      <Styled.Title>{title}</Styled.Title>
+      <Styled.Children>
         {children}
-      </Children>
-    </Wrapper>
+      </Styled.Children>
+    </Styled.ProfileSection>
   )
 }
 
@@ -33,5 +18,3 @@ ProfileSection.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node.isRequired,
 }
-
-export default ProfileSection;

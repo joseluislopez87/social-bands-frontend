@@ -1,63 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+
+import Styled from './Header.styles';
 
 import NotificationsIcon from 'components/Notifications/NotificationsIcon';
 import NotificationsTrail from 'components/Notifications/NotificationsTrail';
 import withBadge from 'hoc/withBadge';
 
-const StyledHeader = styled.header`
-  background: ${({theme}) => theme.headerBackground};
-  border-radius: ${({showNotifications}) => showNotifications ? '0' : '0 0 1rem 1rem'};
-  color: white;
-  display: flex;
-  flex: ${({showNotifications}) => showNotifications ? '1' : '0'};
-  flex-direction: column;
-  min-height: ${({showNotifications}) => showNotifications ? '100%' : '60px'};
-  position: relative;
-  width: 100%;
-  z-index: ${({showNotifications}) => showNotifications ? '1000' : 'auto'};
-`;
-
-const HeaderNav = styled.nav`
-  align-items: center;
-  display: flex;
-  padding: 0.5rem;
-  width: 100%;
-`;
-
-const LogoLink = styled(Link)`
-  display: flex;
-  padding: 0.5rem;
-`;
-
-const Logo = styled.img`
-  height: 25px;
-  width: auto;
-`;
-
-const StyledBadge = styled.div`
-  margin-left: auto;
-`;
-
-const ChildrenWrapper = styled.div`
-  display: flex;
-  padding: 0.5rem 1rem 1rem 1rem;
-  width: 100%;
-
-  &:empty {
-    display: none;
-  }
-`;
-
-const Header = ({showNotifications, toggleNotifications, children}) => {
+export default function Header({ showNotifications, toggleNotifications, children }) {
   const [notifications, setNotifications] = useState([]);
 
   const BadgedNotifications = withBadge(
     notifications.length,
-    StyledBadge)
+    Styled.Badge)
     (NotificationsIcon);
 
   useEffect(() => {
@@ -69,16 +25,16 @@ const Header = ({showNotifications, toggleNotifications, children}) => {
   }, [])
 
   return(
-  <StyledHeader role='banner' showNotifications={showNotifications}>
-    <HeaderNav>
-      <LogoLink to='/' aria-label='Go to Home'>
-        <Logo src='/logo/app.svg' alt='' />
-      </LogoLink>
+  <Styled.Header role='banner' showNotifications={showNotifications}>
+    <Styled.HeaderNav>
+      <Styled.LogoLink to='/' aria-label='Go to Home'>
+        <Styled.Logo src='/logo/app.svg' alt='' />
+      </Styled.LogoLink>
       <BadgedNotifications
         handleClick={() => toggleNotifications(!showNotifications)}
       />
-    </HeaderNav>
-    <ChildrenWrapper>
+    </Styled.HeaderNav>
+    <Styled.Children>
       {
         showNotifications ?
           <NotificationsTrail
@@ -87,12 +43,10 @@ const Header = ({showNotifications, toggleNotifications, children}) => {
         :
           children
       }
-    </ChildrenWrapper>
-  </StyledHeader>);
+    </Styled.Children>
+  </Styled.Header>);
 }
 
 Header.propTypes = {
   children: PropTypes.node,
 }
-
-export default Header;

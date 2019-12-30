@@ -1,25 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components'
 
-const Wrapper = styled.div`
-  background: white;
-  border-radius: 0.2rem;
-  color: black;
-  padding: 0.5em;
-  width: 100%;
-`;
+import Styled from './Notification.styles';
 
-const Notification = ({ data }) => {
+export default function Notification({ data }) {
   return(
-    <Wrapper>
+    <Styled.Notification>
       {data.type}
-    </Wrapper>
+    </Styled.Notification>
   )
 }
 
 Notification.propTypes = {
   data: PropTypes.object.isRequired,
 }
-
-export default Notification;

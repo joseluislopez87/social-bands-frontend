@@ -1,17 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  StyledCard,
-  CoverLink,
-  ImageWrapper,
-  Image,
-  Infos,
-  Name,
-  Text,
-  Children,
-} from './Card.styles';
+import Styled from './Card.styles';
 
-const Card = ({
+export default function Card({
   image,
   title,
   text,
@@ -22,27 +13,27 @@ const Card = ({
   rounded = false,
   displayed,
   roundImg = false,
-}) => {
+}) {
   return(
-    <StyledCard
+    <Styled.Card
       rounded={rounded}
       displayed={displayed}
     >
-      { url && <CoverLink to={url} aria-label={urlLabel} /> }
-      <ImageWrapper roundImg={roundImg} displayed={displayed}>
-        <Image src={image} alt='' />
-      </ImageWrapper>
-      <Infos>
-        <Name>
+      { url && <Styled.CoverLink to={url} aria-label={urlLabel} /> }
+      <Styled.ImageWrapper roundImg={roundImg} displayed={displayed}>
+        <Styled.Image src={image} alt='' />
+      </Styled.ImageWrapper>
+      <Styled.Infos>
+        <Styled.Name>
           {title}
-        </Name>
-        <Text>{text}</Text>
+        </Styled.Name>
+        <Styled.Text>{text}</Styled.Text>
         {slot}
-      </Infos>
-      <Children>
+      </Styled.Infos>
+      <Styled.Children>
         {children}
-      </Children>
-    </StyledCard>
+      </Styled.Children>
+    </Styled.Card>
   )
 }
 
@@ -63,5 +54,3 @@ Card.propTypes = {
   roundImg: PropTypes.bool,
   displayed: PropTypes.string,
 }
-
-export default Card;
