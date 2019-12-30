@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import Styled from './NavBar.styles';
 
@@ -12,25 +13,25 @@ export default function NavBar() {
         to='/'
         icon='explore'
       >
-        Explore
+        <FormattedMessage id='NavBar.explore' />
       </NavBarItem>
       <NavBarItem
         to='/messages'
         icon='messages'
       >
-        Messages
+        <FormattedMessage id='NavBar.messages' />
       </NavBarItem>
       <NavBarItem
         to='/friends'
         icon='profile'
       >
-        Friends
+        <FormattedMessage id='NavBar.friends' />
       </NavBarItem>
       <NavBarItem
         to='/settings'
         icon='settings'
       >
-        Settings
+        <FormattedMessage id='NavBar.settings' />
       </NavBarItem>
     </Styled.NavBar>
   );  

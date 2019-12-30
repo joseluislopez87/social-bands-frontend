@@ -16,34 +16,38 @@ export default function Friends() {
 
   return(
     <Fetcher request='http://localhost:3004/users/0'>
-      { ({ data }) => (
-        <Styled.Friends>
-          {
-            data.friends
-              .sort((a, b) => sortByStatus(a, b))
-              .map(friend => {
-                return(
-                  <Card
-                    key={friend.id} 
-                    image={friend.profile.picture}
-                    title={friend.profile.display_name}
-                    text={friend.is_online ? 'Online' : 'Offline'}
-                    url={`/profile/${friend.username}`}
-                    urlLabel={`Go to ${friend.profile.display_name}'s profile`}
-                    roundImg
-                  >
-                    <RoundButton
-                      to={`/messages/${friend.username}`}
-                      icon='/icons/chat.svg'
-                    >
-                      {`Open chat conversation with ${friend.profile.display_name}`}
-                    </RoundButton>
-                  </Card>
-                );
-              })
-          }
-        </Styled.Friends>
-      ) }
+      {
+        ({ data }) => {
+          return(
+            <Styled.Friends>
+              {
+                data.friends
+                  .sort((a, b) => sortByStatus(a, b))
+                  .map(friend => {
+                    return(
+                      <Card
+                        key={friend.id} 
+                        image={friend.profile.picture}
+                        title={friend.profile.display_name}
+                        text={friend.is_online ? 'Online' : 'Offline'}
+                        url={`/profile/${friend.username}`}
+                        urlLabel={`Go to ${friend.profile.display_name}'s profile`}
+                        roundImg
+                      >
+                        <RoundButton
+                          to={`/messages/${friend.username}`}
+                          icon='/icons/chat.svg'
+                        >
+                          {`Open chat conversation with ${friend.profile.display_name}`}
+                        </RoundButton>
+                      </Card>
+                    );
+                  })
+              }
+            </Styled.Friends>
+          )
+        }
+      }
     </Fetcher>
   )
 }

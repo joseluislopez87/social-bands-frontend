@@ -58,5 +58,5 @@ export default function NavBarItem({ exact, to, icon, children }) {
 NavBarItem.propTypes = {
   to: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
-  children: PropTypes.string.isRequired,
+  children: PropTypes.object.isRequired,
 }
