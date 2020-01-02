@@ -15,6 +15,8 @@ export default function MessagesInfos({ friend }) {
             title={friend.display_name}
             roundImg
             displayed='compressed'
+            url='#'
+            urlLabel={`See ${friend.display_name}'s profile`}
           />
         </Styled.Infos>
         <Styled.Actions>
