@@ -28,5 +28,5 @@ Button.propTypes = {
   handleClick: PropTypes.func.isRequired,
   secondary: PropTypes.bool,
   size: PropTypes.string,
-  children: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 }

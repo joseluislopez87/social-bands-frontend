@@ -10,6 +10,12 @@ export default {
       settings: 'Settings',
     },
     components: {
+      ExploreHeader: {
+        filtersButton: {
+          on: 'Hide filters',
+          off: 'Show filters',
+        }
+      },
       FriendsNav: {
         friends: 'Friends',
         requests: 'Requests',
@@ -47,6 +53,12 @@ export default {
       settings: 'Paramètres',
     },
     components: {
+      ExploreHeader: {
+        filtersButton: {
+          on: 'Cacher les filtres',
+          off: 'Voir les filtres',
+        }
+      },
       FriendsNav: {
         friends: 'Amis',
         requests: 'Requêtes',

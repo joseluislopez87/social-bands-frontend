@@ -9,9 +9,12 @@ const NavBar = styled.nav`
   justify-content: space-between;
   left: 0;
   padding: 0 0.5rem;
-  position: sticky;
   right: 0;
   z-index: 2000;
+
+  @media (min-height: 500px) {
+    position: sticky;
+  }
 `;
 
 const Styled = { NavBar }

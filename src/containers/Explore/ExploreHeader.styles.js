@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ReactSelect from 'react-select';
 
 const ExploreHeader = styled.div`
   display: flex;
@@ -33,11 +34,33 @@ const DistanceSelector = styled.select`
   width: 110px;
 `;
 
+const Filters = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.5em;
+  width: 100%;
+  z-index: 100;
+
+  & > * {
+    width: 100%;
+  }
+
+  & > * + * {
+    margin-top: 0.4em;
+  }
+`;
+
+const Select = styled(ReactSelect)`
+  width: 100%;
+`;
+
 const Styled = {
   ExploreHeader,
   Form,
   Search,
   DistanceSelector,
+  Filters,
+  Select,
 }
 
 export default Styled;
