@@ -7,6 +7,11 @@ const PageTitle = styled.h1`
   margin-bottom: 0.6em;
 `;
 
+const HeaderTitle = styled(PageTitle)`
+  color: white;
+`;
+
 export {
   PageTitle,
+  HeaderTitle,
 }
