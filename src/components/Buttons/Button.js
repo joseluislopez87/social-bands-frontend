@@ -5,17 +5,19 @@ import Styled from './Buttons.styles';
 
 export default function Button({
   handleClick,
-  secondary = false,
+  appearance= 'default',
   fullWidth = false,
   size = 'default',
-  children
+  children,
+  ...props
 }) {
   return(
     <Styled.Button
-      secondary={secondary}
+      appearance={appearance}
       onClick={handleClick}
       size={size}
       fullWidth={fullWidth}
+      {...props}
     >
       {children}
     </Styled.Button>

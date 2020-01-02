@@ -7,15 +7,29 @@ const paddings = {
   large: `${em(14)}`,
 }
 
+const appearances = {
+  default: {
+    color: 'white',
+    background: '#ff512f',
+    border: '0',
+  },
+  secondary: {
+    color: 'black',
+    background: '#f1e9e9',
+    border: '0',
+  },
+  ghost: {
+    color: 'white',
+    background: 'none',
+    border: '2px solid white',
+  }
+}
+
 const Button = styled.button`
-  background: ${({secondary}) =>
-    secondary ?
-      '#f1e9e9' :
-      '#ff512f'
-  };
-  border: 0;
+  background: ${({appearance}) => appearances[appearance].background};
+  border: ${({appearance}) => appearances[appearance].border};
   border-radius: ${em(4)};
-  color: ${({secondary}) => secondary ? 'black' : 'white' };
+  color: ${({appearance}) => appearances[appearance].color};
   font-size: ${rem(15)};
   padding: ${props => paddings[props.size]};
   width: ${props => props.fullWidth ? '100%' : 'auto'};
