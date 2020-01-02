@@ -13,6 +13,7 @@ import NavBar from 'components/NavBar';
 import Explore from 'containers/Explore';
 import Friends from 'containers/Friends';
 import { Profile, ProfileEdit, ProfileHeader } from 'containers/Profile';
+import ExploreHeader from 'containers/Explore/ExploreHeader';
 import Settings from 'containers/Settings';
 import Messages from 'containers/Messages';
 
@@ -39,9 +40,14 @@ const App = ({ history }) => {
             <AppContainer>
               <Header showNotifications={showNotifications} toggleNotifications={toggleNotifications}>
                 <Route
-                    path='/profile'
-                    render={() => <ProfileHeader profile={profile} />}
-                  />
+                  exact
+                  path='/'
+                  render={() => <ExploreHeader />}
+                />
+                <Route
+                  path='/profile'
+                  render={() => <ProfileHeader profile={profile} />}
+                />
               </Header>
               <Content showNotifications={showNotifications}>
                 
