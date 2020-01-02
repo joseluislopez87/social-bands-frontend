@@ -1,15 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import timeFormat from 'utils/date';
-import axios from 'axios';
 
 import Styled from './Chat.styles';
 
 import MessagesInfos from 'components/Messages/MessagesInfos';
 import Message from 'components/Messages/Message';
 import Loading from 'components/Loading';
+import useSWR from 'swr';
+import Error from 'utils/Error';
 
 export default function Chat({ username }) {
-  const [isLoading, setIsLoading] = useState(true);
+  const { data, error } = useSWR(`http://localhost:3004/messages/?friend.username=${username}`);
+
   const [profile, setProfile] = useState({});
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
@@ -18,18 +20,12 @@ export default function Chat({ username }) {
   const latestMessage = useRef(null);
 
   useEffect(() => {
-    async function fetchMessages() {
-      axios.get(`http://localhost:3004/messages/?friend.username=${username}`)
-        .then(response => {
-          setMessages(response.data[0].messages);
-          setProfile(response.data[0].friend.profile);
-          setIsLoading(false);
-          latestMessage.current.scrollIntoView();
-        })
-        .catch(error => console.log(error));
+    if(data) {
+      setMessages(data.data[0].messages);
+      setProfile(data.data[0].friend.profile);
+      latestMessage.current.scrollIntoView();
     }
-    fetchMessages();
-  }, [username]);
+  }, [data]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -57,8 +53,9 @@ export default function Chat({ username }) {
     setNewMessage(e.target.value);
   }
 
+  if (error) return <Error error={error} />
   return(
-    !isLoading ?
+    data ?
       <Styled.Wrapper>
         <MessagesInfos friend={profile} />
         <Styled.MessagesTrail ref={trail}>
