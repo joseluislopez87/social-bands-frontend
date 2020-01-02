@@ -7,6 +7,8 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import flattenMessages from './utils/flattenMessages';
+import { Grommet } from 'grommet';
+import grommetTheme from './themes/grommet';
 
 import locales from 'locales';
 
@@ -24,11 +26,13 @@ const checkLocale = locale => {
 }
 
 const Unison = () => (
-  <IntlProvider locale={locale} messages={checkLocale(locale)}>
-    <Router>
-      <App></App>
-    </Router>
-  </IntlProvider>
+  <Grommet theme={grommetTheme}>
+    <IntlProvider locale={locale} messages={checkLocale(locale)}>
+      <Router>
+        <App></App>
+      </Router>
+    </IntlProvider>
+  </Grommet>
 )
 
 ReactDOM.render(<Unison />, document.getElementById('root'));
