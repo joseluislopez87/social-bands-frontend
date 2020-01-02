@@ -33,7 +33,7 @@ export default function Requests() {
                       Accept
                     </Button>
                     <Button
-                      secondary
+                      appearance='secondary'
                       condensed
                       handleClick={() => console.log('decline')}
                     >
